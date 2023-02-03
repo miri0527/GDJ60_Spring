@@ -13,7 +13,7 @@ import com.iu.s1.util.*;
 @Repository
 public class ProductDAO {
 	
-	
+	//DAO -> ÃÑ¾Ë
 	public Long getProductNum() throws Exception {
 		Connection con = DBConnection.getConnection();
 		

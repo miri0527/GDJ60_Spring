@@ -1,6 +1,7 @@
 package com.iu.s1.product;
 
 public class ProductDTO {
+	//DTO는 필요할때 여러개 만들어야되는데 Annotation은 전체프로그램에서 한 개만 만들어지기 때문에 Annotation 선언 x
 	private Long product_num;
 	private String product_name;
 	private String product_detail;
