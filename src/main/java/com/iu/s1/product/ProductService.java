@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService {
 	
-	//Service -> ì´
+	//Service -> ÃÑ
 	@Autowired
 	private ProductDAO productDAO;
 	
