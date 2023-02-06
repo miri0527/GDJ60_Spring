@@ -6,12 +6,21 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.iu.s1.util.*;
 
 @Repository
 public class ProductDAO {
+	
+	@Autowired
+	private SqlSession sqlSession;
+//	어느 mapper을 쓸꺼냐를 NAMESPACE로 구분
+	private final String NAMESPACE="com.iu.s1.product.ProductDAO.";
 	
 	//DAO -> 총알
 	public Long getProductNum() throws Exception {
@@ -79,69 +88,25 @@ public class ProductDAO {
 	}
 
 	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception {
-		Connection con = DBConnection.getConnection();
-		String sql = "SELECT * FROM PRODUCT "
-				+ "WHERE PRODUCT_NUM = ?";
-		PreparedStatement st = con.prepareStatement(sql);
 		
-		st.setLong(1, productDTO.getProduct_num());
-		
-		ResultSet rs = st.executeQuery();
-		
-		if(rs.next()) {
-			productDTO = new ProductDTO();
-			productDTO.setProduct_num(rs.getLong("PRODUCT_NUM"));
-			productDTO.setProduct_name(rs.getString("PRODUCT_NAME"));
-			productDTO.setProduct_detail(rs.getString("PRODUCT_DETAIL"));
-			productDTO.setProduct_jumsu(rs.getDouble("PRODUCT_JUMSU"));
-		}else {
-			productDTO=null;
-		}
-		
-		DBConnection.disConnection(rs, st, con);
-		
-		return productDTO;
+		//이 mapper의 id를 실행 , 결과값이 한 개기 때문에 selectOne을 쓴다 -> 결과값이 여러 개면 에러
+		return sqlSession.selectOne(NAMESPACE + "getProductDetail", productDTO);
 	}
 	
 	public List<ProductDTO> getProductList() throws Exception {
-		ArrayList<ProductDTO> ar = new ArrayList<ProductDTO>();
-		
-		Connection con = DBConnection.getConnection();
-		String sql = "SELECT PRODUCT_NUM, PRODUCT_NAME, PRODUCT_JUMSU "
-				+ "FROM PRODUCT ORDER BY PRODUCT_JUMSU DESC";
-		
-		PreparedStatement st = con.prepareStatement(sql);
-		
-		ResultSet rs = st.executeQuery();
-		
-		while(rs.next()) {
-			ProductDTO productDTO = new ProductDTO();
-			productDTO.setProduct_num(rs.getLong("PRODUCT_NUM"));
-			productDTO.setProduct_name(rs.getString("PRODUCT_NAME"));
-			productDTO.setProduct_jumsu(rs.getDouble("PRODUCT_JUMSU"));
-			ar.add(productDTO);
-		}
-		
-		DBConnection.disConnection(rs, st, con);
-		return ar;
+		//매개변수가 없어서 보내는게 없다
+		return sqlSession.selectList(NAMESPACE + "getProductList");
 	}
 	
 	public int setAddProduct(ProductDTO productDTO) throws Exception {
-		Connection con = DBConnection.getConnection();
 		
-		String sql = "INSERT INTO PRODUCT VALUES (?,?,?,0.0)";
+		return sqlSession.insert(NAMESPACE + "setAddProduct", productDTO);
 		
-		PreparedStatement st = con.prepareStatement(sql);
+	}
+	
+	public int setProductDelete(Long product_num) throws Exception {
 		
-		st.setLong(1, productDTO.getProduct_num());
-		st.setString(2, productDTO.getProduct_name());
-		st.setString(3, productDTO.getProduct_detail());
-		
-		int result = st.executeUpdate();
-		DBConnection.disConnection(st, con);
-		
-		return result;
-		
+		return sqlSession.delete(NAMESPACE + "setProductDelete", product_num);
 	}
 	
 //	public static void main(String[] args) {
