@@ -32,7 +32,7 @@
 		</thead>
 		
 		<tbody>
-			
+			<!-- dto -> productDTO처럼 하나씩 꺼내기 위해서 변수 선언 -->
 			<c:forEach items="${list}" var = "dto"> <!-- dto는 page영역에 담김 -->
 				<tr>
 				<td><a href = "./detail?product_num=${dto.product_num}">${pageScope.dto.product_name}</a></td>
