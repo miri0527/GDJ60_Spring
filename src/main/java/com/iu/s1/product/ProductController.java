@@ -69,14 +69,14 @@ public class ProductController {
 	
 	//uri경로가 같으면 리턴을 하지 않아도 자동으로 이름이 같은 jsp로 찾아가준다
 	@RequestMapping(value = "productAdd", method = RequestMethod.GET)
-	public void productAdd() {
+	public void setProductAdd() {
 		
 	}
 	
 	//입력페이지를 받아주는 역할
 	@RequestMapping(value = "productAdd", method = RequestMethod.POST)
-	public String productAdd(ProductDTO productDTO) throws Exception {
-		int result= productService.setAddProduct(productDTO, null);
+	public String setProductAdd(ProductDTO productDTO) throws Exception {
+		int result= productService.setProductAdd(productDTO, null);
 		System.out.println(result == 1);
 		//redirect : 사용자가 list로 다시 안해도 자동으로 list를 요청해주는 것
 		String re = "redirect:./list";
