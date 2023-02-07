@@ -17,8 +17,8 @@
 	<%
 		for(ProductDTO productDTO : ar) {
 	%>
-		<h3><%= productDTO.getProduct_name() %></h3>
-		<h3><%= productDTO.getProduct_jumsu() %></h3>
+		<h3><%= productDTO.getProductName() %></h3>
+		<h3><%= productDTO.getProductJumsu() %></h3>
 	<%} %>
 	
 	<hr>
@@ -35,8 +35,8 @@
 			<!-- dto -> productDTO처럼 하나씩 꺼내기 위해서 변수 선언 -->
 			<c:forEach items="${list}" var = "dto"> <!-- dto는 page영역에 담김 -->
 				<tr>
-				<td><a href = "./detail?product_num=${dto.product_num}">${pageScope.dto.product_name}</a></td>
-				<td>${dto.product_jumsu}</td>
+				<td><a href = "./detail?productNum=${dto.productNum}">${pageScope.dto.productName}</a></td>
+				<td>${dto.productJumsu}</td>
 				</tr>
 				
 			</c:forEach>

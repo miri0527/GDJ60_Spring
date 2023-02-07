@@ -10,13 +10,13 @@
   		ORDER BY BOOKNUM
   	</select>
   
-  	<select id = "getBankBookDetail" resultType="com.iu.s1.bankbook.BankBookDTO" parameterType="BankBookDTO">
+  	<select id = "getBankBookDetail" resultType="BankBookDTO" parameterType="BankBookDTO">
   		SELECT * 
   		FROM BANKBOOK
   		WHERE BOOKNUM=#{bookNum}
   	</select>
   	
-  	<insert id="setBannkBookAdd" parameterType="BankBookDTO">
+  	<insert id="setBankBookAdd" parameterType="BankBookDTO">
   		INSERT INTO BANKBOOK
   		VALUES(#{bookNum},#{bookName},#{bookDetail},#{bookRate},#{bookSale})
   	</insert>

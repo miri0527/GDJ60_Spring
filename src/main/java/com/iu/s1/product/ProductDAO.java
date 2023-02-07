@@ -23,10 +23,34 @@ public class ProductDAO {
 	private final String NAMESPACE="com.iu.s1.product.ProductDAO.";
 	
 	//DAO -> 총알
+	//쿼리문 예상해서 처음에 적기
 	public Long getProductNum() throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE + "getProductNum");
 		
+	}
+	
+	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception {
+		
+		//이 mapper의 id를 실행 , 결과값이 한 개기 때문에 selectOne을 쓴다 -> 결과값이 여러 개면 에러
+		productDTO =sqlSession.selectOne(NAMESPACE + "getProductDetail", productDTO);
+		return productDTO;
+	}
+	
+	public List<ProductDTO> getProductList() throws Exception {
+		//매개변수가 없어서 보내는게 없다
+		return sqlSession.selectList(NAMESPACE + "getProductList");
+	}
+	
+	public int setProductAdd(ProductDTO productDTO) throws Exception {
+		
+		return sqlSession.insert(NAMESPACE + "setProductAdd", productDTO);
+		
+	}
+	
+	public int setProductDelete(Long productNum) throws Exception {
+		
+		return sqlSession.delete(NAMESPACE + "setProductDelete", productNum);
 	}
 	
 	public List<ProductOptionDTO> getProductOptionList() throws Exception {
@@ -74,27 +98,7 @@ public class ProductDAO {
 		
 	}
 
-	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception {
-		
-		//이 mapper의 id를 실행 , 결과값이 한 개기 때문에 selectOne을 쓴다 -> 결과값이 여러 개면 에러
-		return sqlSession.selectOne(NAMESPACE + "getProductDetail", productDTO);
-	}
 	
-	public List<ProductDTO> getProductList() throws Exception {
-		//매개변수가 없어서 보내는게 없다
-		return sqlSession.selectList(NAMESPACE + "getProductList");
-	}
-	
-	public int setProductAdd(ProductDTO productDTO) throws Exception {
-		
-		return sqlSession.insert(NAMESPACE + "setProductAdd", productDTO);
-		
-	}
-	
-	public int setProductDelete(Long productNum) throws Exception {
-		
-		return sqlSession.delete(NAMESPACE + "setProductDelete", productNum);
-	}
 	
 //	public static void main(String[] args) {
 //		ProductDAO productDAO = new ProductDAO();
