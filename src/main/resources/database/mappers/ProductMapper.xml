@@ -12,23 +12,23 @@
  	</select>
  	
   	<select id="getProductList" resultType="ProductDTO" statementType="PREPARED">
-  		SELECT PRODUCT_NUM,PRODUCT_NAME,PRODUCT_JUMSU
+  		SELECT PRODUCTNUM,PRODUCTNAME,PRODUCTJUMSU
   		FROM PRODUCT 
-  		ORDER BY PRODUCT_NUM DESC
+  		ORDER BY PRODUCTNUM DESC
   	</select>
   	<!-- parameterType-> 매개변수 resultType -> return타입 -->
   	<select id="getProductDetail" parameterType="ProductDTO" resultType="com.iu.s1.product.ProductDTO">
   		SELECT * 
   		FROM PRODUCT
-  		WHERE PRODUCT_NUM=#{product_num}
+  		WHERE PRODUCTNUM=#{productNum}
   	</select>
   	<!-- insert,update,delete는 항상 리턴타입이 int형이기 때문에 resultType을 적지 않는다 -->
   	<insert id="setProductAdd" parameterType="ProductDTO" >
-  		INSERT INTO PRODUCT VALUES(#{product_num},#{product_name},#{product_detail},0.0)
+  		INSERT INTO PRODUCT VALUES(#{productNum},#{productName},#{productDetail},0.0)
   	</insert>
   	<delete id="setProductDelete" parameterType="Long">
   	<!-- DAO에서 넘겨주는 변수명을 쓴다 -->
-  		DELETE PRODUCT WHERE PRODUCT_NUM=#{product_num}
+  		DELETE PRODUCT WHERE PRODUCTNUM=#{productNum}
   	</delete>
   	
   </mapper>

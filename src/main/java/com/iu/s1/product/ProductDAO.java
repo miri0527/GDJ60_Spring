@@ -42,11 +42,11 @@ public class ProductDAO {
 		
 		while(rs.next()) {
 			ProductOptionDTO productOptionDTO = new ProductOptionDTO();
-			productOptionDTO.setOption_num(rs.getLong("OPTION_NUM"));
-			productOptionDTO.setProduct_num(rs.getLong("PRODUCT_NUM"));
-			productOptionDTO.setOption_name(rs.getString("OPTION_NAME"));
-			productOptionDTO.setOption_price(rs.getLong("OPTION_PRICE"));
-			productOptionDTO.setOption_stock(rs.getLong("OPTION_STOCK"));
+			productOptionDTO.setOptionNum(rs.getLong("OPTIONNUM"));
+			productOptionDTO.setProductNum(rs.getLong("PRODUCTNUM"));
+			productOptionDTO.setOptionName(rs.getString("OPTIONNAME"));
+			productOptionDTO.setOptionPrice(rs.getLong("OPTIONPRICE"));
+			productOptionDTO.setOptionStock(rs.getLong("OPTIONSTOCK"));
 		}
 		DBConnection.disConnection(rs, st, con);
 		return ar;
@@ -55,17 +55,17 @@ public class ProductDAO {
 	public int setAddProductOption(ProductOptionDTO productOptionDTO) throws Exception {
 		Connection con = DBConnection.getConnection();
 		
-		String sql = "INSERT INTO PRODUCTOPTION (OPTION_NUM, PRODUCT_NUM, OPTION_NAME, OPTION_PRICE, OPTION_STOCK) "
+		String sql = "INSERT INTO PRODUCTOPTION (OPTIONNUM, PRODUCTNUM, OPTIONNAME, OPTIONPRICE, OPTIONSTOCK) "
 				+ "VALUES (PRODUCT_SEQ.NEXTVAL,?,?,?,?)";
 		
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		
-		st.setLong(1, productOptionDTO.getOption_num());
-		st.setLong(2, productOptionDTO.getProduct_num());
-		st.setString(3, productOptionDTO.getOption_name());
-		st.setLong(4, productOptionDTO.getOption_price());
-		st.setLong(5, productOptionDTO.getOption_stock());
+		st.setLong(1, productOptionDTO.getOptionNum());
+		st.setLong(2, productOptionDTO.getProductNum());
+		st.setString(3, productOptionDTO.getOptionName());
+		st.setLong(4, productOptionDTO.getOptionPrice());
+		st.setLong(5, productOptionDTO.getOptionStock());
 		
 		int result = st.executeUpdate();
 		DBConnection.disConnection(st, con);
@@ -91,9 +91,9 @@ public class ProductDAO {
 		
 	}
 	
-	public int setProductDelete(Long product_num) throws Exception {
+	public int setProductDelete(Long productNum) throws Exception {
 		
-		return sqlSession.delete(NAMESPACE + "setProductDelete", product_num);
+		return sqlSession.delete(NAMESPACE + "setProductDelete", productNum);
 	}
 	
 //	public static void main(String[] args) {
