@@ -1,4 +1,4 @@
-package com.iu.s1.bankbook;
+package com.iu.s1.bankBook;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class BankBookDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.iu.s1.bankbook.BankBookDAO.";
+	private final String NAMESPACE = "com.iu.s1.bankBook.BankBookDAO.";
 	
 	public List<BankBookDTO> getBankBookList() throws Exception{
 		return sqlSession.selectList(NAMESPACE + "getBankBookList");
@@ -32,8 +32,8 @@ public class BankBookDAO {
 		return sqlSession.update(NAMESPACE + "setBankBookUpdate", bankBookDTO);
 	}
 	
-	public int setBankBookDelelte(BankBookDTO bankBookDTO) throws Exception {
-		return sqlSession.delete(NAMESPACE + "setBankDelete", bankBookDTO);
+	public int setBankBookDelete(BankBookDTO bankBookDTO) throws Exception {
+		return sqlSession.delete(NAMESPACE + "setBankBookDelete", bankBookDTO);
 	}
 	
 }

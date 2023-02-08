@@ -3,8 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.iu.s1.bankbook.BankBookDAO">
-  	<select id = "getBankBookList" resultType="com.iu.s1.bankbook.BankBookDTO">
+  <mapper namespace="com.iu.s1.bankBook.BankBookDAO">
+  	
+  	<select id = "getBankBookList" resultType="BankBookDTO">
   		SELECT BOOKNUM,BOOKNAME,BOOKDETAIL,BOOKRATE,BOOKSALE 
   		FROM BANKBOOK
   		ORDER BY BOOKNUM
@@ -18,6 +19,15 @@
   	
   	<insert id="setBankBookAdd" parameterType="BankBookDTO">
   		INSERT INTO BANKBOOK
-  		VALUES(#{bookNum},#{bookName},#{bookDetail},#{bookRate},#{bookSale})
+  		VALUES(BANKNUM_SEQ.NEXTVAL,#{bookName},#{bookDetail},#{bookRate},#{bookSale})
   	</insert>
+  	
+  	<update id="setBankBookUpdate" parameterType="BankBookDTO">
+  		UPDATE BANKBOOK SET BOOKNAME, BOOKDETAIL, BOOKRATE,BOOKSALE
+  		WHERE BOOKNUM=#{bookNum}
+  	</update>
+  	
+  	<delete id="setBankBookDelete" parameterType="BankBookDTO">
+  		DELETE BANKBOOK WHERE BOOKNUM=#{bookNum} 
+  	</delete>
   </mapper>

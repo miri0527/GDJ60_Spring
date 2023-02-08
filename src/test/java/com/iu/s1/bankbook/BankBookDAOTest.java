@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iu.s1.MyTestCase;
+import com.iu.s1.bankBook.BankBookDAO;
+import com.iu.s1.bankBook.BankBookDTO;
 
 public class BankBookDAOTest extends MyTestCase {
 	

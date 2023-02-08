@@ -1,4 +1,4 @@
-package com.iu.s1.bankbook;
+package com.iu.s1.bankBook;
 
 public class BankBookDTO {
 	private Long bookNum;
