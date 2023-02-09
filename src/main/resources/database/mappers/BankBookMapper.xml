@@ -22,8 +22,9 @@
   		VALUES(BANKNUM_SEQ.NEXTVAL,#{bookName},#{bookDetail},#{bookRate},#{bookSale})
   	</insert>
   	
+  	
   	<update id="setBankBookUpdate" parameterType="BankBookDTO">
-  		UPDATE BANKBOOK SET BOOKNAME, BOOKDETAIL, BOOKRATE,BOOKSALE
+  		UPDATE BANKBOOK SET BOOKNAME=#{bookName},BOOKRATE=#{bookRate},BOOKDETAIL=#{bookDetail}, BOOKSALE=#{bookSale}
   		WHERE BOOKNUM=#{bookNum}
   	</update>
   	
