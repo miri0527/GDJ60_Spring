@@ -1,0 +1,48 @@
+/* * {
+    color: red;
+} */
+
+h1#id1 {
+    color: blue
+}
+h1#id2 {
+    color: red;
+}
+
+/* id를 가진 애들이 우선순위가 더 높다 */
+h1 {
+    color: yellow;
+}
+
+.c1 {
+    color: yellow;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.c2 {
+    width: 200px;
+    height: 200px;
+    background-color: yellow;
+}
+
+/* 자손 선택자 */
+.c2 > p {
+    color: blue;
+    font-weight: bold;
+    text-decoration: line-through;
+    text-decoration-color: red;
+}
+/* 후손 선택자 */
+.c2 div p {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* px, em, % , rem
+ em이 필요한 이유 : 웹에서 나오는 폰트크기와 텝, 폰 등 기기에 따라 폰트 크기가 다 다르기 때문*/
+ /* rem -> 브라우저 폰트 크기를 기준으로 배수씩 늘어남 */

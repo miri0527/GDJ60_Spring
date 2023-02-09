@@ -1,0 +1,17 @@
+.t1 {
+    width: 50%;
+    text-align: center;
+    margin: 0px auto;
+}
+
+/* display inline은 width를 먹지 않는다 */
+/* 그래서 div태그로 감싸야됨 */
+.image {
+    width: 30%;
+    margin: 0px auto;
+}
+
+.title {
+    width: 30%;
+    margin: 0px auto;
+}
