@@ -16,7 +16,7 @@
 		<img alt="아이유이미지" src="../resources/images/iu.jpg">
 	</div>
 	
-	<table class="t1" border="1">
+	<table class="tbl2">
 		<thead>
 			<tr>
 				<th>상품명</th> 
@@ -28,8 +28,8 @@
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td><a href="./detail?bookNum=${dto.bookNum}">${dto.bookName}</a></td>
-					<td>${dto.bookRate}</td>
-					<td>
+					<td class="tb1_td">${dto.bookRate}</td>
+					<td class="tb1_td">
 						<c:choose>
 							<c:when test="${dto.bookSale eq 1}">판매중</c:when>
 							<c:otherwise>판매중단</c:otherwise>
@@ -44,6 +44,6 @@
 		</tbody>
 	</table>
 	
-	<a href="./add">상품입력</button></a><br>
+	<a class="add" href="./add"><button>상품입력</button></a><br>
 </body>
 </html>

@@ -1,0 +1,28 @@
+/* display block -> 화면 전체 크기를 차지하기 때문에 옆으로 붙지를 못하지만
+display inline -> 텍스트 크기만큼만 차지하기 때문에 옆으로 붙을 수 있다
+inline -> margin이 먹지 않는다
+inline-block -> margin을 먹게 하기 위해서 나온 것*/
+
+.c1 {
+    background-color: yellow;
+    list-style: none;
+    display: inline-block;
+    margin-top: 100px;
+}
+
+.c1 li, .c2 li {
+    display: inline;
+}
+
+.c2 {
+    list-style: none;
+    display: inline;
+}
+
+.c3 {
+    float: left;
+}
+
+.c4 {
+    float: right;
+}

@@ -1,0 +1,23 @@
+.f1 {
+    font-size: 2em;
+}
+
+.f1_1 {
+    font-size: 2em ;
+    font-weight: bold;
+    font-style: italic;
+    font-family: 'Sassy Frass', cursive;
+}
+
+.f1_2 {
+    width: 200px;
+    height: 100px;
+    font-size: 1.2rem;
+    font-family: 'Sassy Frass', cursive;
+    font-weight: lighter;
+    font-style: oblique;
+    border: 1px solid rebeccapurple;
+    text-align: center;
+    line-height: 100px;
+
+}
