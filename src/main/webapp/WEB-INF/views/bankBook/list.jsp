@@ -6,21 +6,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>저축상품</title>
 <c:import url="../template/common_css.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/table.css">
+
 
 </head>
 <body>
-	<c:import url="../template/header.jsp"></c:import>
+<c:import url="../template/header.jsp"></c:import>
 
-	<h1 class="title">BankBook List Page</h1>
-	
-	<div class="image">
-		<img alt="아이유이미지" src="../resources/images/iu.jpg">
+<div class="container-fluid my-5">	
+	<div class="row mb-4  ">
+		<h1 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">BankBook List Page</h1>
 	</div>
 	
-	<table class="tbl2">
+	<div class="row col-md-7 mx-auto">
+		<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>상품명</th> 
@@ -46,8 +46,14 @@
 			</c:forEach>
 			
 		</tbody>
-	</table>
+		</table>
 	
-	<a class="add" href="./add"><button>상품입력</button></a><br>
+	</div>
+	<div class="row col-md-7 mx-auto">
+	<!-- 7칸 내에 12칸을 다시 차지 -> 거기서 7칸 -->
+		<a href="./add" class="btn btn-primary col-2">상품등록</a><br>
+	</div>
+</div>	
+	<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

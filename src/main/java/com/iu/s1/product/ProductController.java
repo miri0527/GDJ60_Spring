@@ -76,7 +76,7 @@ public class ProductController {
 	//입력페이지를 받아주는 역할
 	@RequestMapping(value = "productAdd", method = RequestMethod.POST)
 	public String setProductAdd(ProductDTO productDTO) throws Exception {
-		int result= productService.setProductAdd(productDTO, null);
+		int result= productService.setProductAdd(productDTO,null);
 		System.out.println(result == 1);
 		//redirect : 사용자가 list로 다시 안해도 자동으로 list를 요청해주는 것
 		String re = "redirect:./list";

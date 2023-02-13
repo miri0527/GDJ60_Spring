@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품 리스트</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <link rel="stylesheet" href="../resources/css/product.css">
 
@@ -46,6 +46,9 @@
 		</tbody>
 	</table>
 	
-		<a class="btn-danger" href = "./productAdd">상품등록</a>
+			<div class="row col-5 mx-auto">
+				<a href="./productAdd" class="btn btn-primary col-2">상품등록</a><br>
+			</div>
+		<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

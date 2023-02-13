@@ -35,7 +35,10 @@ public class BankBookDTO {
 		return bookSale;
 	}
 	public void setBookSale(Long bookSale) {
-		this.bookSale = bookSale;
+		if(bookSale == null || bookSale !=1) {
+			this.bookSale = bookSale;
+		}
+		
 	}
 	
 	
