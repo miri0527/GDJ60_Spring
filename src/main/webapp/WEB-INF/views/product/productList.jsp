@@ -9,11 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="../template/common_css.jsp"></c:import>
 <link rel="stylesheet" href="../resources/css/product.css">
+
 </head>
 <body>
+	<c:import url="../template/header.jsp"></c:import>
 	<h1 class="title">ProductList Page</h1>
-	<% List<ProductDTO> ar = (List<ProductDTO>) request.getAttribute("list"); %>
+	<%-- <% List<ProductDTO> ar = (List<ProductDTO>) request.getAttribute("list"); %>
 	<%
 		for(ProductDTO productDTO : ar) {
 	%>
@@ -21,7 +24,7 @@
 		<h3><%= productDTO.getProductJumsu() %></h3>
 	<%} %>
 	
-	<hr>
+	<hr> --%>
 	<!-- var: 담을 변수명(위에 productDTO와 동일 -->
 	<table class="table1" border="1">
 		<thead>
@@ -43,6 +46,6 @@
 		</tbody>
 	</table>
 	
-		<a class="btn btn-danger" href = "./productAdd">상품등록</a>
+		<a class="btn-danger" href = "./productAdd">상품등록</a>
 </body>
 </html>

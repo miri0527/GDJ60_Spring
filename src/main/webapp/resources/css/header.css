@@ -1,0 +1,73 @@
+header {
+    width: 100%;
+    height: 67px;
+    background-image: url("/resources/images/header_bg.png");
+    background-repeat: repeat-x;
+}
+
+.header_wrap {
+    width: 50%;
+    height: 100%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header_logo {
+    height: 100%;
+    padding: 13px 0px;
+    box-sizing: border-box;
+}
+
+.header_nav {
+    width: 40%;
+    height: 100%;
+}
+
+.header_nav ul{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+/*텍스트의 부모*/
+.header_nav ul li {
+    line-height: 67px;
+}
+
+.header_nav ul li a {
+    color: white;
+    font-weight: bold;
+}
+
+.header_nav ul li a:hover {
+    color: red;
+    font-weight: bolder;
+}
+
+.header_sub {
+    width: 18%;
+    height: 100%;
+}
+
+.header_sub ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_sub ul li {
+    line-height: 67px;
+}
+
+.header_sub ul li a {
+    color: gray;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.header_sub ul li a:hover {
+    color: white;
+    font-size: 10px;
+    font-weight: bolder;
+}
