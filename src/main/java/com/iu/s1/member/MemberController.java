@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(value="/member/*")
 public class MemberController {
 	
 	@Autowired
@@ -25,5 +26,18 @@ public class MemberController {
 		int result = memberService.setMemberAdd(memberDTO);
 		mv.setViewName("redirect:../");
 		return mv;
+	}
+	
+	@RequestMapping(value = "memberLogin", method=RequestMethod.GET)
+	public ModelAndView getMemberLogin(ModelAndView modelAndView) throws Exception {
+		modelAndView.setViewName("/member/memberLogin");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="memberLogin", method = RequestMethod.POST)
+	public ModelAndView getMemberLogin(ModelAndView modelAndView , MemberDTO memberDTO) throws Exception {
+		memberDTO= memberService.getMemberLogin(memberDTO);
+		modelAndView.setViewName("redirect:../");
+		return modelAndView;
 	}
 }

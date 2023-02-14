@@ -3,6 +3,7 @@ package com.iu.s1.member;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 @Repository
 public class MemberDAO {
@@ -13,5 +14,13 @@ public class MemberDAO {
 	
 	public int setMemberAdd(MemberDTO memberDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setMemberAdd", memberDTO);
+	}
+	
+	public int setMemberRoleAdd(MemberDTO memberDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "setMemberRoleAdd", memberDTO);
+	}
+	
+	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getMemberLogin", memberDTO);
 	}
 }

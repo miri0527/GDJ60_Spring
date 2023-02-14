@@ -1,6 +1,5 @@
 package com.iu.s1.member;
 
-import java.util.List;
 
 public class MemberDTO {
 	private String id;
@@ -8,13 +7,14 @@ public class MemberDTO {
 	private String name;
 	private String phone;
 	private String email;
-	private List<RoleDTO> roleDTOs;
+	private RoleDTO roleDTO;
 	
-	public List<RoleDTO> getRoleDTOs() {
-		return roleDTOs;
+	
+	public RoleDTO getRoleDTO() {
+		return roleDTO;
 	}
-	public void setRoleDTOs(List<RoleDTO> roleDTOs) {
-		this.roleDTOs = roleDTOs;
+	public void setRoleDTO(RoleDTO roleDTO) {
+		this.roleDTO = roleDTO;
 	}
 	public String getId() {
 		return id;

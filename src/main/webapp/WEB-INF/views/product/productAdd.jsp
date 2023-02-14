@@ -18,9 +18,6 @@
 	
 		<form action = "./productAdd" method = "post">
 		
-			<div >
-				
-			</div>
 			<div class="mb-3 col-5 mx-auto" >
 			<label for="name" class="form-label">상품명</label>
 			<input type="text" name="productName" class="form-control" id="name"  placeholder="제품명 입력"><br>
