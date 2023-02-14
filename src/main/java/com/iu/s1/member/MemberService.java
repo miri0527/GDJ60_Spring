@@ -21,4 +21,9 @@ public class MemberService {
 		memberDTO= memberDAO.getMemberLogin(memberDTO);
 		return memberDTO;
 	}
+	
+	public int setMemberUpdate(MemberDTO memberDTO) throws Exception {
+		int result =  memberDAO.setMemberUpdate(memberDTO);
+		return result;
+	}
 }

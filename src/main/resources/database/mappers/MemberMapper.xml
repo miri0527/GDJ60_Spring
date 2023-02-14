@@ -15,8 +15,15 @@
   	</insert>
   	
   	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberDTO">
+  	<!-- 전체를 들고 오지 않고 ID만 들고오면 전 방법에서는 Controller에서 session으로 꺼냈지만, 이 방법은 id만 조회되기 때문에 session엔 id만 남아있고
+  	나머지 정보는 없기 때문에 page, update에서 service를 통해서 전부 다 가져오는 query문을 들고와서 가져오기 -->
   		SELECT *
   		FROM BANKMEMBERS
   		WHERE ID = #{id} AND PW=#{pw}
   	</select>
+  	
+  	<update id="setMemberUpdate" parameterType="MemberDTO" >
+  		UPDATE BANKMEMBERS SET NAME=#{name},PHONE=#{phone}, EMAIL=#{email}
+		WHERE ID=#{id}
+  	</update>
   </mapper>
