@@ -5,13 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iu.s1.util.Pager;
+
 @Service
 public class BankBookService {
 	@Autowired
 	private BankBookDAO bankBookDAO;
 	
-	public List<BankBookDTO> getBankBookList() throws Exception {
-		List<BankBookDTO> ar= bankBookDAO.getBankBookList();
+	//리스트에서 보기 때문에 Service에서는 dao list로 호출
+	public List<BankBookDTO> getBankBookList(Pager pager) throws Exception {
+		
+		Long totalCount = bankBookDAO.getBankBookCount();
+		
+		pager.makeNum(totalCount);
+		pager.makeRow();
+		
+		List<BankBookDTO> ar= bankBookDAO.getBankBookList(pager);
 		return ar;
 	}
 	

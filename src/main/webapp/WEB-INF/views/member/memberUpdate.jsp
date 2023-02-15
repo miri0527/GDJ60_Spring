@@ -21,17 +21,17 @@
 		
 		<div class="mb-3 col-5 mx-auto" >
 			<label for="name" class="form-label">이름 수정</label>
-			<input type="text" name="name" class="form-control" id="name" value="${member.name}" ><br>
+			<input type="text" name="name" class="form-control" id="name" value="${dto.name}" ><br>
 			<!-- Element : 태그명 타입 content로 구성 -->
 		</div>
 		<div class="mb-3 col-5 mx-auto">
 			<label for="phone" class="form-label">전화번호 수정</label>
-			<input type="text" name="phone" class="form-control" id="phone" value="${member.phone}" ><br>
+			<input type="text" name="phone" class="form-control" id="phone" value="${dto.phone}" ><br>
 		</div>
 			
 		<div class="mb-3 col-5 mx-auto">
 			<label for="email" class="form-label">이메일 수정</label>
-			<input type="text" name="email" class="form-control" id="email" value="${member.email}"><br>
+			<input type="text" name="email" class="form-control" id="email" value="${dto.email}"><br>
 		</div>
 		
 		<div class="row col-5 mx-auto mt-4 ">

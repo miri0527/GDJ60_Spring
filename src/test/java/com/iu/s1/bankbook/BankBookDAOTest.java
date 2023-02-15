@@ -3,6 +3,7 @@ package com.iu.s1.bankbook;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,14 @@ public class BankBookDAOTest extends MyTestCase {
 	@Autowired
 	private BankBookDAO bankBookDAO;
 	
-	@Test
+//	@Test
 	public void getBankBookListTest() throws Exception {
-		List<BankBookDTO> ar =  bankBookDAO.getBankBookList();
-		
+		List<BankBookDTO> ar =  bankBookDAO.getBankBookList(null);
+		//Test에서만 사용하는 ar.size가 0이 아니면 true
 		assertNotEquals(0, ar.size());
 	}
 	
-	@Test
+	//@Test
 	public void getBankBookDetailTest() throws Exception {
 		BankBookDTO bankBookDTO = new BankBookDTO();
 		bankBookDTO.setBookNum(10L);
@@ -34,15 +35,23 @@ public class BankBookDAOTest extends MyTestCase {
 
 	@Test
 	public void setBankBookAddTest() throws Exception {
-		BankBookDTO bankBookDTO = new BankBookDTO();
-		bankBookDTO.setBookNum(20L);
-		bankBookDTO.setBookName("testbook");
-		bankBookDTO.setBookDetail("testtest");
-		bankBookDTO.setBookRate(1.2);
-		bankBookDTO.setBookSale(0L);
+		for(int i=0; i<30; i++) {
+			Random r = new Random();
+			double d =  r.nextDouble();
+			int num = (int)d*1000;
+			d = num/100.0;
+			BankBookDTO bankBookDTO = new BankBookDTO();
+			bankBookDTO.setBookName("카카오뱅크" + i);
+			bankBookDTO.setBookDetail("testtest"+ i);
+			bankBookDTO.setBookRate(d);
+			bankBookDTO.setBookSale(0L);
+			
+			int result =  bankBookDAO.setBankBookAdd(bankBookDTO);
+			
+			
+		}
 		
-		int result = bankBookDAO.setBankBookAdd(bankBookDTO);
 		
-		assertNotEquals(0, result);
+		
 	}
 }

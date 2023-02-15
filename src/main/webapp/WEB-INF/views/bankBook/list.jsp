@@ -34,12 +34,12 @@
 					<td><a href="./detail?bookNum=${dto.bookNum}">${dto.bookName}</a></td>
 					<td class="tb1_td">${dto.bookRate}</td>
 					<td class="tb1_td">
-						<c:choose>
+						<%-- <c:choose>
 							<c:when test="${dto.bookSale eq 1}">판매중</c:when>
 							<c:otherwise>판매중단</c:otherwise>
-						</c:choose>
-						<!--<c:if test="${dto.bookSale eq 1}">판매중</c:if>
-						<c:if test="${dto.bookSale eq 0}">판매중단</c:if>-->
+						</c:choose> --%>
+						<c:if test="${dto.bookSale eq 1}">판매중</c:if>
+						<c:if test="${dto.bookSale eq 0}">판매중단</c:if>
 					</td>
 				</tr>
 			
@@ -47,6 +47,32 @@
 			
 		</tbody>
 		</table>
+		
+		<div class="row">
+		
+			<nav aria-label="Page navigation example">
+			  <ul class="pagination ">
+			    <li class="page-item ${pager.before? 'disabled' : ''}">
+			      <a class="page-link" href="./list?page=${pager.startNum-1}" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <!-- for(int i=1; i<=?? i++) {i} -->
+				<!-- item은 컬렉션을 담은것이고 우리는 숫자를 담아와야하기에 item은 되지 않는다 -->
+				<!-- step : 증가 -> default값: 1 -->
+			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+			    	<li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
+			    </c:forEach>
+			    <li class="page-item ${pager.after eq false ? 'disabled' : ''}">
+			    
+			      <a class="page-link" href="./list?page=${pager.lastNum+1}"  aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+			
+		</div>
 	
 	</div>
 	<div class="row col-md-7 mx-auto">

@@ -44,8 +44,10 @@ public class MemberController {
 	@RequestMapping(value="memberLogin", method = RequestMethod.POST)
 	public ModelAndView getMemberLogin(ModelAndView modelAndView , MemberDTO memberDTO, HttpServletRequest request) throws Exception {
 		memberDTO= memberService.getMemberLogin(memberDTO);
-		HttpSession session = request.getSession();
-		session.setAttribute("member", memberDTO);
+		if(memberDTO !=null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("member", memberDTO);
+		}
 		modelAndView.setViewName("redirect:../");
 		return modelAndView;
 	}
@@ -60,15 +62,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="memberPage", method =  RequestMethod.GET)
-	public ModelAndView getMemberPage() throws Exception {
+	public ModelAndView getMemberPage(HttpSession session) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		
+		//id가 담겨져 있다 -> 주소
+		memberDTO =  memberService.getMemberPage(memberDTO);
+		
+		modelAndView.addObject("dto", memberDTO);
 		modelAndView.setViewName("/member/memberPage");
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "memberUpdate" , method = RequestMethod.GET)
-	public ModelAndView setMemberUpdate(MemberDTO memberDTO,HttpSession session) throws Exception {
+	public ModelAndView setMemberUpdate(HttpSession session) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		
+		memberDTO =  memberService.getMemberPage(memberDTO);
+		modelAndView.addObject("dto", memberDTO);
 		modelAndView.setViewName("/member/memberUpdate");
 		return modelAndView;
 	}
@@ -83,9 +95,9 @@ public class MemberController {
 		//DB를 수정하기 때문에 session을 수정 해줘야한다
 		
 		//로그인이 되면 새로운 memberDTO로 세션을 수정 해줘야된다
-		if(result > 0) {
-			session.setAttribute("member", memberDTO);
-		}
+//		if(result > 0) {
+//			session.setAttribute("member", memberDTO);
+//		}
 		modelAndView.setViewName("redirect:./memberPage");
 		return modelAndView;
 	}
