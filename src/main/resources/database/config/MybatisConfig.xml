@@ -10,6 +10,7 @@
   		<typeAlias type="com.iu.s1.member.MemberDTO" alias="MemberDTO"/>
   		<typeAlias type="com.iu.s1.member.RoleDTO" alias="RoleDTO"/>
   		<typeAlias type="com.iu.s1.util.Pager" alias="Pager"/>
+  		<typeAlias type="com.iu.s1.bankBook.BankBookImgDTO" alias="BankBookImgDTO" />
   		
   		<typeAlias type="java.lang.Long" alias="Long"/>
   	</typeAliases>

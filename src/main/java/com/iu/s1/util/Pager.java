@@ -2,8 +2,20 @@ package com.iu.s1.util;
 
 public class Pager {
 	
-	//한페이지의 출력할 Row의 개수
+	//검색 종류(사용할 column)
+	private String kind;
+	//검색어
+	private String search;
+	
+	//한페이지에 출력할 ROW의 갯수
 	private Long perPage;
+	
+	//한블럭당 출력할 번호의 갯수
+	private Long perBlock;
+	
+	//전체 page 갯수
+	private Long totalPage;
+	
 	//Client가 보고싶은 페이지 번호(parameter)
 	private Long page;
 	
@@ -12,15 +24,15 @@ public class Pager {
 	//Table에서 조회할 끝번호
 	private Long lastRow;
 	
-	//전체 row의 개수를 담을 변수
+	//전체 row의 갯수를 담을 변수
 	//private Long totalCount;
 	
-	//jsp에 출력 용도
 	private Long startNum;
 	private Long lastNum;
 	
 	private boolean before;
 	private boolean after;
+
 	
 	//startNum, lastNum
 	public void makeNum(Long totalCount) {
@@ -93,6 +105,39 @@ public class Pager {
 	}
 	
 	
+	
+	public Long getPerBlock() {
+		return perBlock;
+	}
+
+	public void setPerBlock(Long perBlock) {
+		this.perBlock = perBlock;
+	}
+
+	public Long getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(Long totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 	public boolean isBefore() {
 		return before;
 	}

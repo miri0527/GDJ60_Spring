@@ -4,34 +4,94 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.iu.s1.bankBook.BankBookDAO">
-  	
-  		<select id="getBankBookCount" resultType="Long">
-  			SELECT COUNT(BOOKNUM) FROM BANKBOOK
-  		</select>
-  	
-  	<select id = "getBankBookList" parameterType="Pager" resultType="BankBookDTO">
-  		<!--DB에서의 rownum으로 출력 -> rownum은 1번부터 봐야됨  -->
-  		SELECT * FROM 
-		(
-			SELECT ROWNUM R, B.* FROM 
-				(
-					SELECT * FROM BANKBOOK 
-					ORDER BY BOOKNUM DESC)
-				 B)		 
-		WHERE R BETWEEN #{startRow} AND #{lastRow}
-  		
-  	</select>
   
-  	<select id = "getBankBookDetail" resultType="BankBookDTO" parameterType="BankBookDTO">
-  		SELECT * 
-  		FROM BANKBOOK
-  		WHERE BOOKNUM=#{bookNum}
+  	<sql id="searchCondition">
+ 		 <if test="kind == 'contents'">
+ 			WHERE BOOKDETAIL LIKE  '%' || #{search} || '%'
+ 		</if>
+ 		
+ 		<if test="kind == 'title'">
+ 			WHERE BOOKNAME LIKE  '%' || #{search} || '%'
+ 		</if>
+ 	
+ 	</sql>
+ 	
+ 	<sql id="searchCondition2">
+ 		WHERE
+						
+			<choose>
+				<when test="kind == 'contents'">
+					BOOKDETAIL  
+				</when>
+				<otherwise>
+					BOOKNAME
+				</otherwise>
+			</choose>
+		 LIKE  '%' || #{search} || '%'
+ 	
+ 	</sql>
+  	
+	<select id="getBankBookCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(BOOKNUM) FROM BANKBOOK
+	 	<include refid="searchCondition"></include>	
+ 	</select>
+ 
+  	
+  	<select id="getBankBookList" parameterType="Pager" resultType="BankBookDTO">
+  		<!--DB에서의 rownum으로 출력 -> rownum은 1번부터 봐야됨  -->
+ 		SELECT * FROM
+			(
+				SELECT ROWNUM R, B.* FROM
+					(
+						SELECT * FROM BANKBOOK
+						<include refid="searchCondition"></include>						
+						ORDER BY BOOKNUM DESC
+					) B 
+			)
+		WHERE R BETWEEN #{startRow}  AND #{lastRow} 
+	</select>
+  	
+  	
+  
+  	<select id = "getBankBookDetail" resultMap="bankBookDetailResult" parameterType="BankBookDTO">
+  		SELECT B.*,BI.* 
+  		FROM BANKBOOKIMG BI
+			RIGHT OUTER JOIN
+				BANKBOOK B
+					ON BI.BOOKNUM = B.BOOKNUM
+			WHERE B.BOOKNUM =#{bookNum}
   	</select>
   	
-  	<insert id="setBankBookAdd" parameterType="BankBookDTO">
-  		INSERT INTO BANKBOOK
-  		VALUES(BKBOOK_SEQ.NEXTVAL,#{bookName},#{bookDetail},#{bookRate},#{bookSale})
-  	</insert>
+  	<!--type -> 리턴 타입 id->식별하기 위한 것  -->
+  	<!--https://mybatis.org/mybatis-3/sqlmap-xml.html#Result_Maps  -->
+  	<resultMap type="BankBookDTO" id="bankBookDetailResult">
+  		<!--Primary key property -> setter  -->
+  		<id column="BOOKNUM" property="bookNum"/>
+  		<!--그 외 나머지  -->
+  		<result column="BOOKNAME" property="bookName"/>
+  		<result column="BOOKDETAIL" property="bookDetail"/>
+  		<result column="BOOKRATE" property="bookRate"/>
+  		<result column="BOOKSALE" property="bookSale"/>
+  		
+  		<!--1:1 -> assiciation과 collection 두 개 있으면 associtaion 부터 쓴다-->
+  		<!--javaType에서는 풀패키지명을 적어야하지만 config에 별칭으로 선언  -->
+  		<association property="bankBookImgDTO" javaType="BankBookImgDTO">
+  		<!--bookNum은 위에도 있기 때문에 또 선언하지 않아도됨  -->
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</association>
+  		<!--1:N  -->
+  		<!--<collection property=""></collection>  -->
+  	</resultMap>
+  	
+    <insert id="setBankbookAdd" parameterType="BankbookDTO">
+     <selectKey keyProperty="bookNum" resultType="Long" order="BEFORE">
+        SELECT BKBOOK_SEQ.NEXTVAL FROM DUAL
+     </selectKey>
+     INSERT INTO BANKBOOK
+     VALUES (#{bookNum}, #{bookName}, #{bookDetail}, #{bookRate}, #{bookSale})
+   </insert>
   	
   	
   	<update id="setBankBookUpdate" parameterType="BankBookDTO">
@@ -42,4 +102,9 @@
   	<delete id="setBankBookDelete" parameterType="BankBookDTO">
   		DELETE BANKBOOK WHERE BOOKNUM=#{bookNum} 
   	</delete>
+  	
+  	<insert id="setBankBookImgAdd" parameterType="BankBookImgDTO">
+ 		INSERT INTO BANKBOOKIMG
+ 		VALUES (BKBOOK_SEQ.NEXTVAL, #{bookNum}, #{fileName}, #{oriName})
+ 	</insert>
   </mapper>
