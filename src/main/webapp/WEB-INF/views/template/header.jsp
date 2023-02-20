@@ -23,7 +23,7 @@
       	</c:if>
       	<c:if test="${empty member}">
       		<li class="nav-item"><a class="nav-link"  href="/member/memberLogin">LOGIN</a></li>
-      		<li class="nav-item"><a class="nav-link"  href="/member/memberAdd">JOIN</a></li>
+      		<li class="nav-item"><a class="nav-link"  href="/member/memberAgree">JOIN</a></li>
       	</c:if>
       	
 		<li class="nav-item"><a class="nav-link"  href="#">KO</a></li>

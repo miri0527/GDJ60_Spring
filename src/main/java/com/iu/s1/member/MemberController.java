@@ -20,6 +20,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@RequestMapping(value = "memberAgree", method = RequestMethod.GET)
+	public void setMemberAgree() throws Exception {
+		
+	}
+	
+	
 	@RequestMapping(value = "memberAdd", method = RequestMethod.GET)
 	public ModelAndView setMemberAdd()throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -52,7 +58,7 @@ public class MemberController {
 		return modelAndView;
 	}
 	
-	//request·Î ±»ÀÌ ²¨³»Áö ¾Ê°í sessionÀ¸·Î ¹Ù·Î ²¨³¾ ¼öµµ ÀÖ´Ù
+	//requestï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ sessionï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½
 	@RequestMapping(value="memberLogout", method = RequestMethod.GET)
 	public ModelAndView getMemeberLogout(HttpSession session) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
@@ -66,7 +72,7 @@ public class MemberController {
 		ModelAndView modelAndView = new ModelAndView();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		
-		//id°¡ ´ã°ÜÁ® ÀÖ´Ù -> ÁÖ¼Ò
+		//idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ -> ï¿½Ö¼ï¿½
 		memberDTO =  memberService.getMemberPage(memberDTO);
 		
 		modelAndView.addObject("dto", memberDTO);
@@ -86,15 +92,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
-	//´Ù¸¥ »ç¶÷ÀÌ ¼öÁ¤À» ÇÏÁö ¸øÇÏµµ·Ï sessionÀ¸·Î ²¨³½´Ù
+	//ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ sessionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public ModelAndView setMemberUpdate(MemberDTO memberDTO, ModelAndView modelAndView,HttpSession session) throws Exception {
-		//µ¤¾î¾º¿ì¸é ¾ÈµÈ´Ù
+		//ï¿½ï¿½ï¿½î¾ºï¿½ï¿½ï¿½ ï¿½ÈµÈ´ï¿½
 		MemberDTO sessionMemberDTO = (MemberDTO) session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
 		int result =  memberService.setMemberUpdate(memberDTO);
-		//DB¸¦ ¼öÁ¤ÇÏ±â ¶§¹®¿¡ sessionÀ» ¼öÁ¤ ÇØÁà¾ßÇÑ´Ù
+		//DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sessionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 		
-		//·Î±×ÀÎÀÌ µÇ¸é »õ·Î¿î memberDTO·Î ¼¼¼ÇÀ» ¼öÁ¤ ÇØÁà¾ßµÈ´Ù
+		//ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ memberDTOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ßµÈ´ï¿½
 //		if(result > 0) {
 //			session.setAttribute("member", memberDTO);
 //		}
