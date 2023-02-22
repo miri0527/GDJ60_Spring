@@ -24,7 +24,7 @@ public class BankBookDAO {
 		return sqlSession.selectList(NAMESPACE + "getBankBookList", pager);
 	}
 	
-	//»ó¼¼Á¤º¸¸¦ º¸·Á¸é numÀ» ²¨³»¾ßÇÔ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ numï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public BankBookDTO getBankBookDetail(BankBookDTO bankBookDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getBankBookDetail", bankBookDTO);
 	}

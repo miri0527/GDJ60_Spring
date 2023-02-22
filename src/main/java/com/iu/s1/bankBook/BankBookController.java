@@ -23,7 +23,7 @@ public class BankBookController {
 	@RequestMapping(value="list", method = RequestMethod.GET)
 	public ModelAndView getBankBookList(ModelAndView modelAndView, Pager pager) throws Exception {
 		
-		                                                        //pager¶ó´Â ½ÇÁ¦°ªÀÇ ÁÖ¼Ò¸¦ º¸³¿
+		                                                        //pagerï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 		List<BankBookDTO> ar =  bankBookService.getBankBookList(pager);
 		
 		
@@ -34,7 +34,7 @@ public class BankBookController {
 	}
 	
 	@RequestMapping(value="detail", method = RequestMethod.GET)
-	//parameter·Î bookNumÀÌÁö¸¸, ÇÑ¹ø¿¡ bankBookDTO·Î ¹Þ¾Æ¿Â´Ù
+	//parameterï¿½ï¿½ bookNumï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ñ¹ï¿½ï¿½ï¿½ bankBookDTOï¿½ï¿½ ï¿½Þ¾Æ¿Â´ï¿½
 	public ModelAndView getBankBookDetail(ModelAndView modelAndView,BankBookDTO bankBookDTO) throws Exception {
 		bankBookDTO =  bankBookService.getBankBookDetail(bankBookDTO);
 		modelAndView.setViewName("bankBook/detail");
@@ -78,7 +78,7 @@ public class BankBookController {
 		return modelAndView;
 	}
 	
-	//¼öÁ¤ Æû ÀÌµ¿
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping(value="update", method = RequestMethod.GET)
 	public ModelAndView setBankBookUpdate(BankBookDTO bankBookDTO) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
