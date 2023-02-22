@@ -17,8 +17,8 @@ public class BankBookService {
 	@Autowired
 	private BankBookDAO bankBookDAO;
 	
-	//testcase Å×½ºÆ®½Ã NullÀÌ µé¾î¿È
-	//API Ãß°¡
+	//testcase ï¿½×½ï¿½Æ®ï¿½ï¿½ Nullï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	//API ï¿½ß°ï¿½
 	@Autowired
 	private ServletContext servletContext;
 	
@@ -44,13 +44,13 @@ public class BankBookService {
 		
 		if(pic.isEmpty()) { //pic.getSize() !=0
 		
-		//1. FileÀ» HDD¿¡ ÀúÀå °æ·Î
-		// Project °æ·Î°¡ ¾Æ´Ñ OS°¡ ÀÌ¿ëÇÏ´Â °æ·Î
+		//1. Fileï¿½ï¿½ HDDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		// Project ï¿½ï¿½Î°ï¿½ ï¿½Æ´ï¿½ OSï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 		String realPath = servletContext.getRealPath("resources/upload/bankBook");
 		System.out.println(realPath);
 		String fileName = fileManager.fileSave(pic, realPath);
 		
-		//2. DB¿¡ ÀúÀå
+		//2. DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		BankBookImgDTO bankBookImgDTO = new BankBookImgDTO();
 		bankBookImgDTO.setFileName(fileName);
 		bankBookImgDTO.setOriName(pic.getOriginalFilename());
