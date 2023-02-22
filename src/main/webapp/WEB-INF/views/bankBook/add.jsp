@@ -31,16 +31,20 @@
          <div class="form-check form-switch justify-content-center">
             <input class="form-check-input" name="bookSale" type="checkbox" role="switch" id="flexSwitchCheckDefault">
             <label class="form-check-label" for="flexSwitchCheckDefault">판매 여부</label>
-         </div>         
-         <div class="fw-bold fs-5 col-12 mt-3">
-            <label for="files" class="form-label">Image</label>
-            <input type="file" class="form-control" id="files" name="pic">
-         </div>         
+         </div>    
+
+         <div id = "fileList">
+            <!--<div class="fw-bold fs-5 col-12 mt-3">
+               <label for="files" class="form-label">Image</label>
+               <input type="file" class="form-control" id="files" name="pic">
+            </div>   -->
+            <button type="button" id="addBtn">ADD</button>
+         </div>           
          
 <!--          <fieldset class="mb-4">
             <legend class="fw-bold fs-5">판매 여부</legend>
             <div class="form-check form-check-inline">
-               <label for="bs1" class="form-check-label" id="inlineRadio1">판매</label>
+               <label for="bs1" class="form-check-labyyel" id="inlineRadio1">판매</label>
                <input id="bs1" type="radio" name="bookSale" value="1" checked class="form-check-input" for="inlineRadio1">
             </div>
             <div class="form-check form-check-inline">
@@ -62,6 +66,13 @@
       </div>
    </form>
 </div>
+<script src="../resources/js/fileManager.js"></script>
+<script>
+   setMax(3)
+   //setParam();
+</script>
+<c:import url="../template/common_js.jsp"></c:import>
+
 </body>
-   <c:import url="../template/common_js.jsp"></c:import>
+  
 </html>

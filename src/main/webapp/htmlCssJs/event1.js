@@ -35,7 +35,7 @@ input2.addEventListener("change", function() {
 //radio는 value가 바뀌지 않기 때문에 change가 아니다
 input3.addEventListener("change", function() {
     console.log(input3.value)
-},)
+})
 
 btn.onclick=function() {
     //focus 강제 실행 해라

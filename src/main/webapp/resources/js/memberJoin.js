@@ -13,12 +13,8 @@ id.addEventListener("blur", function() {
 const pw = document.getElementById("pw")
 const pwResult = document.getElementById("pwResult")
 pw.addEventListener("blur", function() {
-    if(pw.value < 6 || pw.value > 13) {
-        pwResult.innerHTML = "비밀번호는 6자리에서 13자리 사이입니다"
-    } else {
-        pwResult.innerHTML = "정상비밀번호"
-    }
-})
+    
+} )
 
 
 

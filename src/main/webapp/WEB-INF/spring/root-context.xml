@@ -13,7 +13,6 @@
 			<property name="maxUploadSizePerFile" value="5242880"></property>
 		</bean>
 		
-		<!-- test 시 가짜 ServletContext 객체 생성 -->
-		<bean class="org.springframework.mock.web.MockServletContext" id="servletContext"></bean>
+		
 		
 </beans>
