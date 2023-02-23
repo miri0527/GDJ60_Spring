@@ -7,10 +7,17 @@
   	<typeAliases>
   		<typeAlias type="com.iu.s1.product.ProductDTO" alias="ProductDTO"/>
   		<typeAlias type="com.iu.s1.bankBook.BankBookDTO" alias="BankBookDTO"/>
+  		<typeAlias type="com.iu.s1.bankBook.BankBookImgDTO" alias="BankBookImgDTO" />
+  		<typeAlias type="com.iu.s1.bankBook.BankBookCommentDTO" alias="BankBookCommentDTO"/>
+  		<typeAlias type="com.iu.s1.board.BbsDTO" alias="BbsDTO"/>
+  		<typeAlias type="com.iu.s1.board.BoardDTO" alias="BoardDTO"/>
+  		<typeAlias type="com.iu.s1.board.notice.NoticeDTO" alias="NoticeDTO"/>
+  		<typeAlias type="com.iu.s1.board.qna.QnaDTO" alias="QnaDTO"/>
+  		
   		<typeAlias type="com.iu.s1.member.MemberDTO" alias="MemberDTO"/>
   		<typeAlias type="com.iu.s1.member.RoleDTO" alias="RoleDTO"/>
   		<typeAlias type="com.iu.s1.util.Pager" alias="Pager"/>
-  		<typeAlias type="com.iu.s1.bankBook.BankBookImgDTO" alias="BankBookImgDTO" />
+  		
   		
   		<typeAlias type="java.lang.Long" alias="Long"/>
   	</typeAliases>

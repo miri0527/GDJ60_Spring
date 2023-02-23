@@ -1,4 +1,4 @@
-package com.iu.s1.bankbook;
+package com.iu.s1.bankBook;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +20,7 @@ public class BankBookDAOTest extends MyTestCase {
 //	@Test
 	public void getBankBookListTest() throws Exception {
 		List<BankBookDTO> ar =  bankBookDAO.getBankBookList(null);
-		//Test¿¡¼­¸¸ »ç¿ëÇÏ´Â ar.size°¡ 0ÀÌ ¾Æ´Ï¸é true
+		//Testï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ar.sizeï¿½ï¿½ 0ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ true
 		assertNotEquals(0, ar.size());
 	}
 	
@@ -41,7 +41,7 @@ public class BankBookDAOTest extends MyTestCase {
 			int num = (int)d*1000;
 			d = num/100.0;
 			BankBookDTO bankBookDTO = new BankBookDTO();
-			bankBookDTO.setBookName("Ä«Ä«¿À¹ðÅ©" + i);
+			bankBookDTO.setBookName("Ä«Ä«ï¿½ï¿½ï¿½ï¿½Å©" + i);
 			bankBookDTO.setBookDetail("testtest"+ i);
 			bankBookDTO.setBookRate(d);
 			bankBookDTO.setBookSale(0L);
