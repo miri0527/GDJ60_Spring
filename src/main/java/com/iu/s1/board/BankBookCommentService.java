@@ -44,6 +44,24 @@ public class BankBookCommentService implements BbsService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 }

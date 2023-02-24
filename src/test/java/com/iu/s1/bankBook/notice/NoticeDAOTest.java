@@ -31,8 +31,18 @@ public class NoticeDAOTest extends MyTestCase{
 		List<BbsDTO> ar =  noticeDAO.getBoardList(pager);
 		assertNotEquals(0, ar.size());
 		
-		//assertNotEquals(0, count );
+		//assertNotEquals(0, count )	
+	}
+	
+	@Test
+	public void setBoardAdd() throws Exception {
+		NoticeDTO noticeDTO =  new NoticeDTO();
+		noticeDTO.setTitle("Title");
+		noticeDTO.setWriter("안뇽");
+		noticeDTO.setContents("contents1");
+		int result = noticeDAO.setBoardAdd(noticeDTO);
 		
+		assertEquals(1, result);
 		
 	}
 	

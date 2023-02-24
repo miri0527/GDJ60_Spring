@@ -13,6 +13,10 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 	<div class="container-fluid">
+		<div class="row my-5">
+			<h1>${boardName} List</h1>
+		</div>
+		
 		<div class="row">
 			<%--<% List<BbsDTO> ar = (List<BbsDTO>)request.getAttribute("list"); %>  --%>
 			<table class="table table-hover">
@@ -24,10 +28,15 @@
 				<tbody>
 					<c:forEach items="${list}" var = "dto">
 					<!-- BbsDTO에 title, regDate, hit는 없지만 자동으로 호출됨 -->
-					<!--이유:   -->
+					<!--이유: -->
 						<tr>
 							<td>${dto.num}</td>	
-							<td><a href="./detail">${dto.title}</a></td>
+							
+							<c:catch>
+							<c:forEach begin="1" end="${dto.depth}">--</c:forEach>
+							</c:catch>
+							
+							<td><a href="./detail?num=${dto.num}">${dto.title}</a></td>
 							<td>${dto.writer }</td>
 							<td>${dto.regDate }</td>
 							<td>${dto.hit }</td>
@@ -81,9 +90,10 @@
 	            <div class="col-auto">
 	               <label for="kind" class="visually-hidden">Email</label>
 	               <select class="form-select" name="kind" id="kind" aria-label="Default select example">
-	                  <option value="title" ${pager.kind eq 'title' ? 'selected' : ''}>Title</option>
-	                  <option value="contents " ${pager.kind eq 'contents' ? 'selected : ''>Contents</option>
-	                  <option value="writer" ${pager.kind eq 'writer' ? 'selected' : ''>Writer</option>
+	               <!--검색했을 때 s  -->
+	                  <option value="title" ${pager.kind eq 'title' ? 'selected' : ''}>Title </option>
+	                  <option value="contents " ${pager.kind eq 'contents' ? 'selected' : ''}>Contents </option>
+	                  <option value="writer" ${pager.kind eq 'writer' ? 'selected' : ''}>Writer </option>
 	               </select>
 	            </div>
 	            <div class="col-auto">
@@ -98,12 +108,16 @@
 	      
 		</div>
 		
+		<div class="row">
+			<a href="./add" class="btn btn-primary">글작성</a>
+		</div>
+		
 	</div>
 	
 <c:import url="../template/common_js.jsp"></c:import>	
 <script src="../resources/js/pageing.js"></script>
 <script>
-	setDA=ata{'${pager.searcg}'}
+	setData ('${pager.search}')
 </script>
 </body>
 </html>

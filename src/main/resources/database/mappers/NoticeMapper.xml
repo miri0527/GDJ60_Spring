@@ -32,4 +32,15 @@
  			ORDER BY NUM DESC) N)
  	WHERE R BETWEEN #{startRow} AND #{lastRow} 		
  	</select>
+ 	
+ 	<select id="getBoardDetail" parameterType="BoardDTO" resultType="NoticeDTO">
+ 		SELECT * FROM NOTICE WHERE NUM=#{num}
+ 	</select>
+ 	
+ 	<!--dao에서 BbsDTO타입으로 받아줬기 때문에 NoticeDTO로 받으면 모든 BbsDTO타입이 NoticeDTO이 아니기 떄문에 -->
+ 	<select id="setBoardAdd" parameterType="BbsDTO">
+ 		INSERT INTO NOTICE (NUM,TITLE,CONTENTS,WRITER,REGDATE,HIT)
+ 		VALUES (NOTICE_SEQ.NEXTVAL,#{title},#{contents},#{writer},SYSDATE,0)
+ 	</select>
+ 	
  </mapper> 

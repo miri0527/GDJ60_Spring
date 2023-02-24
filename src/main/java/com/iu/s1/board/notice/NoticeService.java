@@ -9,13 +9,15 @@ import com.iu.s1.board.BbsDAO;
 import com.iu.s1.board.BbsDTO;
 import com.iu.s1.board.BoardDTO;
 import com.iu.s1.board.BoardService;
+import com.iu.s1.board.qna.QnaDAO;
+import com.iu.s1.board.qna.QnaDTO;
 import com.iu.s1.util.Pager;
 
 @Service
 public class NoticeService implements BoardService{
 	
 	@Autowired
-	private BbsDAO noticeDAO;
+	private NoticeDAO noticeDAO;
 
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
@@ -27,27 +29,31 @@ public class NoticeService implements BoardService{
 	}
 
 	@Override
-	public int setBoardAdd(Pager pager) throws Exception {
+	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
+		int result =  noticeDAO.setBoardAdd(bbsDTO);
+		return result;
+	}
+
+	@Override
+	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int setBoardUpdate(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setBoardDelete(Pager pager) throws Exception {
+	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
+		boardDTO =  noticeDAO.getBoardDetail(boardDTO);
 		return null;
 	}
+	
+	
+
+	
 
 }

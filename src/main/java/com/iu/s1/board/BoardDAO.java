@@ -4,7 +4,7 @@ import com.iu.s1.util.Pager;
 
 public interface BoardDAO extends BbsDAO{
 	
-	public BbsDTO getBoardDetail (Pager pager) throws Exception;
+	public BoardDTO getBoardDetail (BoardDTO boardDTO) throws Exception;
 	
 	
 }
