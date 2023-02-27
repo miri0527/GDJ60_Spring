@@ -46,7 +46,7 @@
 <script src="../resources/js/fileManager.js"></script>
 <script>
    setMax(3)
-   //setParam();
+   setParam('files');
 </script>
 <c:import url="../template/common_js.jsp"></c:import>
 

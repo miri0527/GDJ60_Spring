@@ -2,6 +2,8 @@ package com.iu.s1.board.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,7 @@ import com.iu.s1.board.BoardDTO;
 import com.iu.s1.util.Pager;
 
 @Controller
-@RequestMapping("/notice/*")
+@RequestMapping("/notice/**")
 public class NoticeController {
 	
 	@Autowired
@@ -27,7 +29,7 @@ public class NoticeController {
 	
 	@ModelAttribute("boardName")
 	public String getBoardName() {
-		return "Notice";
+		return "notice";
 	}
 	
 	//Pager를 model에 넣어주고 보내주지 않았는데 작동되는 이유 :@ModelAttribute(noticeController)가 자동 생성
@@ -52,9 +54,9 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(NoticeDTO noticeDTO, MultipartFile [] files) throws Exception {
+	public ModelAndView setBoardAdd(NoticeDTO noticeDTO, MultipartFile [] files, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result =  noticeService.setBoardAdd(noticeDTO);
+		int result =  noticeService.setBoardAdd(noticeDTO, files,session );
 		
 		String message = "등록 싫패";
 		
@@ -77,6 +79,27 @@ public class NoticeController {
 		BoardDTO boardDTO = noticeService.getBoardDetail(noticeDTO);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/detail");
+		return mv;
+	}
+	
+	@GetMapping("replay")
+	public ModelAndView setReplayAdd(BoardDTO noticeDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("board/replay");
+		mv.addObject("dto", noticeDTO);
+		
+		return mv;
+		
+	}
+	
+	@PostMapping("replay")
+	public ModelAndView setReplayAdd(NoticeDTO noticeDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		
+		
 		return mv;
 	}
 }

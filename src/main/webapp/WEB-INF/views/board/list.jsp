@@ -117,7 +117,7 @@
 <c:import url="../template/common_js.jsp"></c:import>	
 <script src="../resources/js/pageing.js"></script>
 <script>
-	setData ('${pager.search}')
+	//setData ('${pager.search}')
 </script>
 </body>
 </html>

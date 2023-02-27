@@ -10,35 +10,33 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileManager {
+	
+	//Fileì„ HDDì—ì„œ ì‚­ì œ
+	public boolean fileDelete(String path, String fileName) throws Exception {
+		File file = new File(path, fileName);
+		
+		//ì„±ê³µí•˜ë©´ true, ì‹¤íŒ¨í•˜ë©´ false ë¦¬í„´
+		return  file.delete();
+	}
+	
    
-   //FileÀ» HDD¿¡ ÀúÀå
+ 
    public String fileSave(MultipartFile multipartFile, String path) throws Exception {
-      //1. ¾îµğ¿¡ ÀúÀåÇÒ °ÍÀÎ°¡?
-      //      /resources/upload/bankbook/...
-      //2. ÀúÀå °ü¸®´Â ¿î¿µ Ã¼Á¦°¡ ´ã´ç
-      
-      //ÀúÀåÇÒ Æú´õÀÇ Á¤º¸¸¦ °¡Áö°í ÀÖ´Â ÀÚ¹Ù °´Ã¼¸¦ ¼±¾ğ
+     
       File file = new File(path);
-      //Æú´õ°¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é Æú´õ »ı¼º
+  
       if(!file.exists()) {
          file.mkdirs();
       }
       
-      //3. Áßº¹µÇÁö ¾Ê´Â ÆÄÀÏ¸í »ı¼º
-      //Calendar calendar = Calendar.getInstance();
-      //calendar.getTimeInMillis();
+   
       String name = UUID.randomUUID().toString();
 
-      //4. È®ÀåÀÚ Ãß°¡
-      //OriginalName¿¡¼­ subStringÀ» ÀÌ¿ëÇØ¼­ È®ÀåÀÚ¸¦ ÃßÃâ
       name = name + "_" + multipartFile.getOriginalFilename();
 
-      //5. ÆÄÀÏ ÀúÀå
+   
       file = new File(file, name);
       
-      //   1) multipartFile °´Ã¼ÀÇ transferTo() »ç¿ë
-      //multipartFile.transferTo(file);
-      //   2) Spring API FileCopyUtils °´Ã¼ÀÇ copy() »ç¿ë
       FileCopyUtils.copy(multipartFile.getBytes(), file);
       
       return name;

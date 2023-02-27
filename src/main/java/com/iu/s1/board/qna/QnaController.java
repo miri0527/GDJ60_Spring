@@ -2,6 +2,8 @@ package com.iu.s1.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.board.BbsDTO;
@@ -28,7 +31,7 @@ public class QnaController {
 	//list.jsp에 qna를 뿌려주고 싶을 때
 	@ModelAttribute("boardName") //보내 줄 속성 이름
 	public String getBoardName() {
-		return "Qna";
+		return "qna";
 	}
 	
 	
@@ -53,10 +56,10 @@ public class QnaController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(QnaDTO  qnaDTO) throws Exception {
+	public ModelAndView setBoardAdd(QnaDTO  qnaDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result =  qnaService.setBoardAdd(qnaDTO);
+		int result =  qnaService.setBoardAdd(qnaDTO,files,session );
 		String message = "등록 실패";
 		
 		if(result > 0) {
@@ -105,6 +108,25 @@ public class QnaController {
 		mv.addObject("result", msg);
 		mv.addObject("url", "./detail?num=" + qnaDTO.getNum());
 		mv.setViewName("common/result");
+		return mv;
+	}
+	
+	@PostMapping("delete")
+	//뭐로 받은 num만 있으면 됨
+	public ModelAndView setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("common/result");
+		
+		int result =  qnaService.setBoardDelete(bbsDTO,session);
+		
+		String message="삭제가 실패 하였습니다";
+
+		if(result > 0) {
+			message="삭제가 성공되었습니다";
+		}
+		
+		mv.addObject("result", message);
+		mv.addObject("url", "./list");
 		return mv;
 	}
 

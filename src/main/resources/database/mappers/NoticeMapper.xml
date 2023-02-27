@@ -38,9 +38,26 @@
  	</select>
  	
  	<!--dao에서 BbsDTO타입으로 받아줬기 때문에 NoticeDTO로 받으면 모든 BbsDTO타입이 NoticeDTO이 아니기 떄문에 -->
- 	<select id="setBoardAdd" parameterType="BbsDTO">
- 		INSERT INTO NOTICE (NUM,TITLE,CONTENTS,WRITER,REGDATE,HIT)
- 		VALUES (NOTICE_SEQ.NEXTVAL,#{title},#{contents},#{writer},SYSDATE,0)
+ 	<insert id="setBoardAdd" parameterType="NoticeDTO">
+ 		<selectKey keyProperty="num"  resultType="Long" order="BEFORE">
+ 			SELECT NOTICE_SEQ FROM DUAL
+ 		</selectKey>
+ 		INSERT INTO NOTICE
+ 		VALUES (#{num},#{title},#{contents},#{writer},#{regDate},#{hit})
+ 	</insert>
+ 	
+ 	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+ 		INSERT INTO NOTICEFILES
+ 		VALUES(NOTICE_SEQ,#{num},#{fileName},#{oriName})
+ 	</insert>
+ 	
+ 	<delete id="setBoardDelete" parameterType="BbsDTO">
+ 		DELETE NOTICE WHERE NUM=#{num}
+ 	</delete>
+ 	
+ 	<select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+ 		SELECT * FROM NOTICEFILES NUM=#{num}
  	</select>
+ 	
  	
  </mapper> 

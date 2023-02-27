@@ -37,9 +37,34 @@
  	WHERE R BETWEEN #{startRow} AND #{lastRow} 		
  	</select>
  	
- 	<select id="getBoardDetail" parameterType="BoardDTO" resultType="QnaDTO">
- 		SELECT * FROM NOTICE WHERE NUM=#{num}
+ 	<select id="getBoardDetail" parameterType="BoardDTO" resultMap="getBoardDetailResult">
+ 	<!-- file은 있을 수도 있고 없을 수도 있기 때문에 outer join -->
+ 		SELECT * FROM QNA
+			LEFT OUTER JOIN  
+					QNAFILES  
+				ON (QNA.NUM = QNAFILES.NUM)
+		WHERE QNA.NUM=#{num}
+ 		
  	</select>
+ 	
+ 	<resultMap type="QnaDTO" id="getBoardDetailResult">
+ 		<id column="num" property="num"/>
+ 		<result column="title" property="title"/>
+ 		<result column="writer" property="writer"/>
+ 		<result column="contents" property="contents"/>
+ 		<result column="regDate" property="regDate"/>
+ 		<result column="hit" property="hit"/>
+ 		<result column="depth" property="depth"/>
+ 		
+ 		<!-- javaType -> 데이터 타입, ofType -> 제네릭 -->
+ 		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+ 		<!-- 반복하면서 꺼내자 -->
+ 			<id column="fileNum" property="fileNum"/>
+ 			<!-- num은 위에서 꺼냈기 때문에 굳이 num을 또 꺼낼 필요가 없다 -->
+ 			<result column="fileName" property="fileName"/>
+ 			<result column="oriName" property="oriName"/>
+ 		</collection>
+ 	</resultMap>
  	
  	<insert id="setBoardAdd" parameterType="QnaDTO">
  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
@@ -48,6 +73,11 @@
  	
  		INSERT INTO QNA
  		VALUES(#{num}, #{title},#{contents},#{writer},SYSDATE,0,#{num}, 0,0)
+ 	</insert>
+ 	
+ 	<insert id="setBoardFileAdd" parameterType= "BoardFileDTO">
+ 		INSERT INTO QNAFILES (FILENUM,NUM,FILENAME,ORINAME)
+ 		VALUES (QNA_SEQ.NEXTVAL,#{num},#{fileName},#{oriName})
  	</insert>
  	
  	<update id="setStepUpdate" parameterType="QnaDTO">
@@ -59,4 +89,14 @@
  		INSERT INTO QNA
  		VALUES(QNA_SEQ,NEXTVAL, #{title},#{contents},#{writer},SYSDATE,0,#{ref},#{step},#{depth})
  	</insert>
+ 	
+ 	<delete id="setBoardDelete" parameterType="BbsDTO">
+ 		DELETE QNA WHERE NUM=#{num}
+ 	</delete>
+ 	<!-- 파일 자체를 삭제하면 upload/qna에 파일 자체가 저장이 되어있는데 그 파일 이름을 가지고 오기 위해서 db에서 조회  -->
+ 	<select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+ 	<!-- fileNum은 file이름을 구분하기 위한 pk -> 지금은 지우려고 하는 num의 모든 파일들을 삭제 -->
+ 		SELECT * FROM QNAFILES WHERE NUM=#{num}
+ 	</select>
+ 	
  </mapper> 

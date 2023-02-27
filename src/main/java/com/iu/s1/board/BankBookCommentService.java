@@ -28,24 +28,6 @@ public class BankBookCommentService implements BbsService{
 	}
 
 	@Override
-	public int setBoardAdd(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setBoardUpdate(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setBoardDelete(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;

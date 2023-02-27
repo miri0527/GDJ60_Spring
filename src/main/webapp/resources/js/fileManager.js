@@ -6,6 +6,7 @@ const addBtn = document.getElementById("addBtn")
 let count = 0;
 let max = 3
 let param = 'files';
+let idx = 0
 
 function setParam(p) {
     param=p;
@@ -14,6 +15,15 @@ function setParam(p) {
 function setMax(m) {
     max = m;
 }
+
+fileList.addEventListener("click",function(e) {
+    if(e.target.classList.contains('dels')) {
+        e.target.parentNode.remove()
+        // let id = e.target.getAttribute('data-dels-id')
+        // document.getElementById(id).remove()
+        count--;
+    }
+})
 
 
     addBtn.addEventListener("click", function() {
@@ -25,7 +35,7 @@ function setMax(m) {
         }else {
             let d = document.createElement('div')
             let l = document.createElement('label')
-            let t = document.createTextNode('Image')
+           // let t = document.createTextNode('Image')
             let i = document.createElement('input')
             let b = document.createElement('button')
             let t2 = document.createTextNode('X')
@@ -33,7 +43,7 @@ function setMax(m) {
             //Element들의 조합
             d.appendChild(l)
             d.appendChild(i)
-            l.appendChild(t)
+            //l.appendChild(t)
             b.appendChild(t2)
             d.appendChild(b)
         
@@ -42,6 +52,12 @@ function setMax(m) {
             let attr = document.createAttribute('class')
             attr.value='fw-bold fs-5 col-12 mt-3'
             d.setAttributeNode(attr)
+
+            attr = document.createAttribute('id')
+            attr.value = 'f' + idx
+            d.setAttributeNode(attr)
+            
+            
         
             //label
             attr = document.createAttribute('class')
@@ -74,20 +90,22 @@ function setMax(m) {
             attr.value = 'button'
             b.setAttributeNode(attr)
 
-            attr = document.createAttribute('id')
-            attr.value='delBtn'
-            b.setAttributeNode(attr)
-
             attr = document.createAttribute("class")
-            attr.value="btn btn-danger"
+            attr.value="btn btn-danger dels"
             b.setAttributeNode(attr)
 
-            b.addEventListener("click",function() {
-                d.remove();
-                count--
-            })
+            attr = document.createAttribute('data-dels-id')
+            attr.value = 'f' + idx
+            b.setAttributeNode(attr)
+
+            // b.addEventListener("click",function() {
+            //     d.remove();
+            //     count--
+            // })
         
             //fileList내부에 div태그 넣어주기
+            idx++
+
             fileList.prepend(d);
             count++;
 

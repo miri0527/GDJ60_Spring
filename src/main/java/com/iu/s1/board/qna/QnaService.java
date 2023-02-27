@@ -1,14 +1,20 @@
 package com.iu.s1.board.qna;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.s1.board.BbsDAO;
 import com.iu.s1.board.BbsDTO;
 import com.iu.s1.board.BoardDTO;
+import com.iu.s1.board.BoardFileDTO;
 import com.iu.s1.board.BoardService;
+import com.iu.s1.util.FileManager;
 import com.iu.s1.util.Pager;
 
 @Service
@@ -16,6 +22,11 @@ public class QnaService implements BoardService{
 	
 	@Autowired
 	private QnaDAO qnaDAO;
+	
+	@Autowired
+	private FileManager fileManager;
+	
+	
 
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
@@ -28,8 +39,31 @@ public class QnaService implements BoardService{
 	}
 
 	@Override
-	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
+	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
 		int result =  qnaDAO.setBoardAdd(bbsDTO);
+		
+		//file HDD에 저장
+		String realPath =  session.getServletContext().getRealPath("resources/upload/qna/");
+		System.out.println(realPath);
+		
+		for(MultipartFile multipartFile : multipartFiles) {
+			if(multipartFile.isEmpty()) {
+				continue;
+				
+			}
+			String fileName =  fileManager.fileSave(multipartFile, realPath);
+		
+		
+		
+		//DB INSERT
+		BoardFileDTO boardFileDTO = new BoardFileDTO();
+		boardFileDTO.setNum(bbsDTO.getNum());
+		boardFileDTO.setFileName(fileName);
+		boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+		
+		result = qnaDAO.setBoardFileAdd(boardFileDTO);
+	  }
+		
 		return result;
 	}
 
@@ -40,9 +74,24 @@ public class QnaService implements BoardService{
 	}
 
 	@Override
-	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception {
+		
+		//cascading을 걸어놓으면 file이 지워지기 때문에 미리 조회를 함
+		List<BoardFileDTO> ar= qnaDAO.getBoardFileList(bbsDTO);
+		int result =  qnaDAO.setBoardDelete(bbsDTO);
+		
+		//하드디스크에 있는 파일을 삭제
+		if(result > 0) {
+			
+			String realPath = session.getServletContext().getRealPath("resources/upload/qna/");
+			
+			for (BoardFileDTO boardFileDTO : ar) {
+				boolean check =  fileManager.fileDelete(realPath,boardFileDTO.getFileName() );
+			}
+			
+			
+		}
+		return result;
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import com.iu.s1.board.BbsDAO;
 import com.iu.s1.board.BbsDTO;
 import com.iu.s1.board.BoardDAO;
 import com.iu.s1.board.BoardDTO;
+import com.iu.s1.board.BoardFileDTO;
 import com.iu.s1.util.Pager;
 
 @Repository
@@ -36,6 +37,8 @@ public class QnaDAO implements BoardDAO{
 		int result =  sqlSession.insert(NAMESPLACE + "setBoardAdd", bbsDTO);
 		return result;
 	}
+	
+	
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
@@ -45,10 +48,11 @@ public class QnaDAO implements BoardDAO{
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPLACE + "setBoardDelete", bbsDTO);
 	}
 
+	
+	
 	@Override
 	public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPLACE + "getBoardDetail", boardDTO);
@@ -62,5 +66,17 @@ public class QnaDAO implements BoardDAO{
 	public int setReply (QnaDTO qnaDTO) throws Exception {
 		return sqlSession.insert(NAMESPLACE + "setReplay", qnaDTO);
 	}
+
+	@Override
+	public int setBoardFileAdd(BoardFileDTO boardFileDTO) throws Exception {
+		return sqlSession.insert(NAMESPLACE + "setBoardFileAdd", boardFileDTO);
+	}
+
+	@Override
+	public List<BoardFileDTO> getBoardFileList(BbsDTO bbsDTO) throws Exception {
+		return sqlSession.selectList(NAMESPLACE + "getBoardFileList", bbsDTO);
+	}
+
+	
 	
 }
