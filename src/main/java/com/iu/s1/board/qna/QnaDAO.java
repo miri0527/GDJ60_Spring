@@ -77,6 +77,12 @@ public class QnaDAO implements BoardDAO{
 		return sqlSession.selectList(NAMESPLACE + "getBoardFileList", bbsDTO);
 	}
 
+	@Override
+	public BoardFileDTO getBoardFileDetail(BoardFileDTO boardFileDTO) throws Exception {
+	
+		return sqlSession.selectOne(NAMESPLACE + "getBoardFileDetail", boardFileDTO);
+	}
+
 	
 	
 }

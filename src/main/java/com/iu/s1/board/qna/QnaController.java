@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.iu.s1.board.BbsDTO;
 import com.iu.s1.board.BbsService;
 import com.iu.s1.board.BoardDTO;
+import com.iu.s1.board.BoardFileDTO;
 import com.iu.s1.board.BoardService;
 import com.iu.s1.util.Pager;
 
@@ -127,6 +128,19 @@ public class QnaController {
 		
 		mv.addObject("result", message);
 		mv.addObject("url", "./list");
+		return mv;
+	}
+	
+	@GetMapping("fileDown")
+	public ModelAndView getFileDown(BoardFileDTO boardFileDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		boardFileDTO =  qnaService.getBoardFileDetail(boardFileDTO);
+		
+		mv.addObject("boardFile", boardFileDTO);
+		//fileDownView라는 이름의 bean의 객체가 있는지 찾아봄 -> 없으면 원래대로 jsp를 찾으러감
+		//있으면 fileDownView라는 객체를 가진 class로 감
+		mv.setViewName("fileDownView");
+		
 		return mv;
 	}
 

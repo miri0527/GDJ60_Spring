@@ -99,4 +99,9 @@
  		SELECT * FROM QNAFILES WHERE NUM=#{num}
  	</select>
  	
+	<!--FileNum 한개를 조회  -->
+	<select id="getBoardFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+		SELECT * FROM QNAFILES WHERE FILENUM=#{fileNum}
+	</select>
+ 	
  </mapper> 

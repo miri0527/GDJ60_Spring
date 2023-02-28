@@ -57,6 +57,11 @@ public class NoticeDAO implements BoardDAO {
 	public List<BoardFileDTO> getBoardFileList(BbsDTO bbsDTO) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "getBoardFileList", bbsDTO);
 	}
+
+	@Override
+	public BoardFileDTO getBoardFileDetail(BoardFileDTO boardFileDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getBoardFileDetail", boardFileDTO);
+	}
 	
 	
 }

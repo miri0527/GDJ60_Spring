@@ -80,7 +80,17 @@ public class NoticeService implements BoardService{
 	public int setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception {
 		List<BoardFileDTO> ar =  noticeDAO.getBoardFileList(bbsDTO);
 		int result =  noticeDAO.setBoardDelete(bbsDTO);
+		
+		if(result > 0) {
+			
+		}
 		return 0;
+	}
+
+
+	@Override
+	public BoardFileDTO getBoardFileDetail(BoardFileDTO boardFileDTO) throws Exception {
+		return noticeDAO.getBoardFileDetail(boardFileDTO);
 	}
 
 	
