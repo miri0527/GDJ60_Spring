@@ -21,13 +21,15 @@ public class MemberService {
 		//memberDTO= memberDAO.getMemberLogin(memberDTO);
 		//return memberDTO;
 		
-		//memberDTO : Client¿Í ÀÔ·ÂÇÑ ID,PW
+		//memberDTO : Clientì—ì„œ ìž…ë ¥í•œ ID,PW
 		MemberDTO result = memberDAO.getMemberLogin(memberDTO);
-		//result : ID¿Í ÀÏÄ¡ÇÏ´Â ¸ðµç Á¤º¸
+		//result : IDì™€ ì¼ì¹˜í•˜ëŠ” ëª¨ë“  ì •ë³´
 		
 		//pw check
 		if(result !=null && memberDTO.getPw().equals(result.getPw())) {
-			memberDTO.setPw(null); //ÀÔ·ÂÇÑ°Å¿¡ null -> id´Â ÀÖÀ½
+			//IDì™€ ROLEì •ë³´
+			memberDTO.setPw(null);
+			memberDTO.setRoleDTO(result.getRoleDTO());
 			return memberDTO;
 		}else {
 			return null;

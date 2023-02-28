@@ -37,7 +37,18 @@
 							</c:catch>
 							
 							<td><a href="./detail?num=${dto.num}">${dto.title}</a></td>
-							<td>${dto.writer }</td>
+							<td>
+								<c:choose >
+									<c:when test="${boardName eq 'notice' }">
+										관리자
+									</c:when>
+									<c:otherwise>
+										${dto.writer }
+									</c:otherwise>
+								</c:choose>
+							
+							
+							</td>
 							<td>${dto.regDate }</td>
 							<td>${dto.hit }</td>
 						</tr>
@@ -108,12 +119,24 @@
 	      
 		</div>
 		
-		<div class="row">
-			<a href="./add" class="btn btn-primary">글작성</a>
-		</div>
+			<c:if test="${not empty member}">
+			<!--notice는 문자열이기 때문에 홑따음표 붙임  -->
+				<c:if test="${boardName eq 'notice'}">
+					<c:if test="${member.roleDTO.roleName eq 'ADMIN'}">
+						<div class="row">
+							<a href="./add" class="btn btn-primary">글작성</a>
+						</div>
+					</c:if>
+				</c:if>
+				
+				<c:if test="${boardName eq 'qna'}">
+						<div class="row">
+							<a href="./add" class="btn btn-primary">글작성</a>
+						</div>
+				</c:if>
+			</c:if>
 		
-	</div>
-	
+
 <c:import url="../template/common_js.jsp"></c:import>	
 <script src="../resources/js/pageing.js"></script>
 <script>

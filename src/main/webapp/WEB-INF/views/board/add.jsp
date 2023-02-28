@@ -14,6 +14,7 @@
    <div class="row col-md-4 mx-auto text-center border-bottom border-dark pb-2">
      <p class="fs-2" style="font-family: 'Impact'">${boardName} Add Page</p>
    </div>
+   
    <form action="./add" method = "post" enctype="multipart/form-data">
       <div class="row col-md-4 mx-auto my-5">
          <div class="fw-bold fs-5 col-12">
@@ -24,10 +25,12 @@
             <p>내용</lp>
             <textarea name="contents" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="내용 입력"></textarea><br>
          </div>
-         <div class="fw-bold fs-5 col-12">
-            <p>작성자</p>
-            <input type="text" name="writer" class="form-control" id="exampleFormControlInput1"><br>
-         </div>         
+         
+	         <div class="fw-bold fs-5 col-12">
+	            <p>작성자</p>
+	            <input type="text" name="writer" class="form-control" value = "${member.id}" readonly="readonly" id="exampleFormControlInput1"><br>
+	         </div>   
+   
 
          <div id = "fileList">
           	<!-- <div class="fw-bold fs-5 col-12 mt-3">
@@ -44,6 +47,8 @@
          </div>
       </div>
    </form>
+
+ 
 </div>
 <script src="../resources/js/fileManager.js"></script>
 <script>
