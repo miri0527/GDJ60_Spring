@@ -46,7 +46,7 @@ public class NoticeService implements BoardService{
 	@Override
 	public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception {
 		boardDTO =  noticeDAO.getBoardDetail(boardDTO);
-		return null;
+		return boardDTO;
 	}
 
 	@Override

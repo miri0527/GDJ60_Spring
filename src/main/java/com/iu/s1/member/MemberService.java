@@ -16,7 +16,6 @@ public class MemberService {
 		result = memberDAO.setMemberRoleAdd(memberDTO);
 		return result;
 	}
-	
 	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception {
 		//memberDTO= memberDAO.getMemberLogin(memberDTO);
 		//return memberDTO;

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.iu.s1.board.BbsDTO;
 import com.iu.s1.board.BbsService;
 import com.iu.s1.board.BoardDTO;
 import com.iu.s1.board.BoardFileDTO;
+import com.iu.s1.member.MemberDTO;
 import com.iu.s1.util.Pager;
 
 @Controller
@@ -43,6 +45,25 @@ public class NoticeController {
 		mv.setViewName("board/list");
 		return mv;
 		
+	}
+	
+	@PostMapping("delete")
+	public ModelAndView setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("common/result");
+		
+		int result =  noticeService.setBoardDelete(bbsDTO,session);
+		
+		String message="삭제가 실패 하였습니다";
+
+		if(result > 0) {
+			message="삭제가 성공되었습니다";
+		}
+		
+		mv.addObject("result", message);
+		mv.addObject("url", "./list");
+		return mv;
 	}
 	
 	@GetMapping("add")
@@ -110,6 +131,18 @@ public class NoticeController {
 		//fileDownView라는 이름의 bean의 객체가 있는지 찾아봄 -> 없으면 원래대로 jsp를 찾으러감
 		//있으면 fileDownView라는 객체를 가진 class로 감
 		mv.setViewName("fileDownView");
+		
+		return mv;
+	}
+	
+	@GetMapping("update")
+	public ModelAndView setBoardUpdate(BoardDTO boardDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		boardDTO =  noticeService.getBoardDetail(boardDTO);
+		
+		mv.addObject("dto", boardDTO);
+		mv.setViewName("board/update");
+		
 		
 		return mv;
 	}

@@ -33,10 +33,10 @@
 				<div>
 				<form action="./update" id="frm">
 					<input type="hidden" name="num" value="${dto.num}">
-					<c:if test="${dto.writer eq member.id}">
+					<%-- <c:if test="${dto.writer eq member.id}"> --%>
 						<button id="update" type="submit" class="btn btn-primary">UPDATE</button>
 						<button id="delete" type="button" class="btn btn-info">DELETE</button>
-					</c:if>
+					<%-- </c:if> --%>
 				</form>
 				</div>
 			
