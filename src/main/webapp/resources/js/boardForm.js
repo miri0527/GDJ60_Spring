@@ -4,6 +4,7 @@ const frm = document.getElementById("frm")
 
 delete2.addEventListener("click", function() {
     //확인 : true, 취소: false
+    
     let check =  window.confirm("정말 삭제하시겠습니까?");
 
     if(check ) {
