@@ -30,8 +30,7 @@ public class BankBookCommentDAO implements BbsDAO{
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPCAE + "setBoardAdd", bbsDTO);
 	}
 
 	@Override
@@ -45,5 +44,6 @@ public class BankBookCommentDAO implements BbsDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
 	
 }

@@ -35,6 +35,18 @@ public class NoticeController {
 		return "notice";
 	}
 	
+	@GetMapping("listTop")
+	public ModelAndView getBoardListTop(Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		pager.setPerPage(5L);
+		
+		List<BbsDTO> ar =  noticeService.getBoardList(pager);
+		mv.addObject("list", ar);
+		mv.setViewName("common/noticeResult");
+		
+		return mv;
+	}
+	
 	//Pager를 model에 넣어주고 보내주지 않았는데 작동되는 이유 :@ModelAttribute(noticeController)가 자동 생성
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView getBoardList(Pager pager) throws Exception {
