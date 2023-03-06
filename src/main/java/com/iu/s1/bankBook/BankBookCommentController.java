@@ -28,7 +28,7 @@ public class BankBookCommentController {
 		ModelAndView mv = new ModelAndView();
 		List<BbsDTO> ar =  bankBookCommentService.getBoardList(pager);
 		
-		mv.addObject("llst", ar);
+		mv.addObject("list", ar);
 		mv.setViewName("common/commentList");
 		
 		return mv;
@@ -36,13 +36,33 @@ public class BankBookCommentController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(BankBookCommentDTO bankBookCommentDTO, HttpSession session) throws Exception {
+	public ModelAndView setBoardAdd(BankBookCommentDTO bankBookCommentDTO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		//bankBookCommentDTO.setWriter(memberDTO.getId());
 		bankBookCommentDTO.setWriter("Madmin");
-		int result =  bankBookCommentService.setBoardAdd(bankBookCommentDTO, null, null);
+		int result = bankBookCommentService.setBoardAdd(bankBookCommentDTO, null, null);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	@PostMapping("delete")
+	public ModelAndView setBoardDelete(BankBookCommentDTO bankBookCommentDTO ,HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = bankBookCommentService.setBoardDelete(bankBookCommentDTO, null);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setBoardUpdate(BankBookCommentDTO bankBookCommentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = bankBookCommentService.setBoardUpdate(bankBookCommentDTO);
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
 		
