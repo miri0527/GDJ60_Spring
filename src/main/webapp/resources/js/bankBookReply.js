@@ -91,44 +91,47 @@ commentListResult.addEventListener("click", function(e) {
 })
 
 //update
-commentListResult.addEventListener("click", function(e) {
+commentListResult.addEventListener("click", function(e){
     let updateButton = e.target;
-    if(updateButton.classList.contains("update")) {
-      //console.log(updateButton.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling)
-      let num = updateButton.getAttribute("data-comment-num") 
-      let contents = document.getElementById("contents" + num) //td
-    
-      let contentsTextArea = document.getElementById("contents") //Modal textarea
-
-      //value
-      contentsTextArea.value=contents.innerText
-      contentsConfirm.setAttribute("data-comment-num",num)
+    if(updateButton.classList.contains("update")){
+        
+        let num = updateButton.getAttribute("data-comment-num");
+        let contents = document.getElementById("contents"+num); //td
+        console.log(contents);
+        let contentsTextArea=document.getElementById("contents")//Modal textarea
+        console.log(contentsTextArea);
+        //value
+        contentsTextArea.value=contents.innerText;
+        contentsConfirm.setAttribute("data-comment-num", num);
     }
-    e.preventDefault()
-})
+    
+    e.preventDefault();
+    
+});
 
 
 //
-contentsConfirm.addEventListener("click", function() {
-    console.log("Update Post")
-    let updateContents = document.getElementById("contents").value
-    let num = contentsConfirm.getAttribute("data-comment-num")
+contentsConfirm.addEventListener("click", function(){
+    console.log("Update Post");
+    let updateContents = document.getElementById("contents").value;
+    let num = contentsConfirm.getAttribute("data-comment-num");
 
-    let xhttp = new XMLHttpRequest()
-       xhttp.open("POST", "../bankBookComment/update")
-       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-       xhttp.send("num="+num+"&contents="+updateContents)
-        xhttp.addEventListener("readystatechange", function() {
-            if(this.readyState ==4 && this.status==200) {
-                let result = this.responseText.trim()
-                if(result>0) {
-                    alert("수정 성공")
-                    getList(1)
-                }else {
-                    alert("수정 실패")
-                }
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../bankBookComment/update");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("num="+num+"&contents="+updateContents);
+    xhttp.addEventListener("readystatechange", function(){
+        if(this.readyState==4&&this.status==200){
+            let result = this.responseText.trim();
+            if(result>0){
+                alert('수정 성공');
+                closeModal.click();
+                getList(1);
+            }else {
+                alert('삭제 실패');
             }
-        })
+            
+        }        
+    });
+    
 })
-
-
