@@ -1,7 +1,9 @@
 const replyAdd = document.getElementById("replyAdd")
 const replyContents = document.getElementById("replyContents")
 const commentListResult = document.getElementById("commentListResult")
-const contents = document.getElementById("contents")
+
+const contentsConfirm = document.getElementById("contentsConfirm")
+const closeModal = document.getElementById("closeModal")
 
 
 replyAdd.addEventListener("click", function() {
@@ -93,38 +95,29 @@ commentListResult.addEventListener("click", function(e) {
     let updateButton = e.target;
     if(updateButton.classList.contains("update")) {
       //console.log(updateButton.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling)
-      let num = updateButton.getAttribute("data-comment-num")
-      let contents = document.getElementById("contents" + num)
-    //   console.log(contents)
-    //   contents.innerHTML='<textarea>'+contents.innerHTML+'</textarea>'
-      contents.firstChild.removeAttribute("readonly")
+      let num = updateButton.getAttribute("data-comment-num") 
+      let contents = document.getElementById("contents" + num) //td
+    
+      let contentsTextArea = document.getElementById("contents") //Modal textarea
+
+      //value
+      contentsTextArea.value=contents.innerText
+      contentsConfirm.setAttribute("data-comment-num",num)
+    }
+    e.preventDefault()
+})
 
 
-      let btn = document.createElement("button")
-      let btn2 = document.createElement("button")
-      let attr = document.createAttribute("class")
-      let attr2 = document.createAttribute("class")
-      attr.value="btn btn-info"
-      attr2.value="btn btn-danger"
-      btn.setAttributeNode(attr)
-      btn2.setAttributeNode(attr2)
-      contents.appendChild(btn)
-      contents.appendChild(btn2)
+//
+contentsConfirm.addEventListener("click", function() {
+    console.log("Update Post")
+    let updateContents = document.getElementById("contents").value
+    let num = contentsConfirm.getAttribute("data-comment-num")
 
-
-      attr = document.createTextNode("확인")
-      attr2 = document.createTextNode("취소")
-      btn.appendChild(attr)
-      btn2.appendChild(attr2)
-
-      btn.addEventListener("click", function() {
-        console.log(contents.firstChild.value)
-        console.log(num)
-
-        let xhttp = new XMLHttpRequest()
-        xhttp.open("POST", "../bankBookComment/update")
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhttp.send("num="+num+"&contents="+contents.firstChild.value)
+    let xhttp = new XMLHttpRequest()
+       xhttp.open("POST", "../bankBookComment/update")
+       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+       xhttp.send("num="+num+"&contents="+updateContents)
         xhttp.addEventListener("readystatechange", function() {
             if(this.readyState ==4 && this.status==200) {
                 let result = this.responseText.trim()
@@ -136,13 +129,6 @@ commentListResult.addEventListener("click", function(e) {
                 }
             }
         })
-      })
-
-
-    }
-
-    e.preventDefault()
 })
-
 
 
