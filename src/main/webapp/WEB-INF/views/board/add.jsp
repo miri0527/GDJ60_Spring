@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<!--게시판 만들기  -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -51,12 +55,12 @@
  
 </div>
 <script src="../resources/js/fileManager.js"></script>
+<c:import url="../template/common_js.jsp"></c:import>
 <script>
    setMax(5)
+   $("#exampleFormControlTextarea1").summernote()
    setParam('files');
 </script>
-<c:import url="../template/common_js.jsp"></c:import>
-
 </body>
   
 </html>
