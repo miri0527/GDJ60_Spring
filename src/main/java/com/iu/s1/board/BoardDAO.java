@@ -22,4 +22,7 @@ public interface BoardDAO extends BbsDAO{
 	//BoardFileDetail -> FileNum 한 개 조회
 	public BoardFileDTO getBoardFileDetail(BoardFileDTO boardFileDTO) throws Exception;
 	
+	//filedelete
+	//Long타입으로 하나를 받아서 지우자
+	public int setBoardFileDelete(Long fileNum) throws Exception;
 }

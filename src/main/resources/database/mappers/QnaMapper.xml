@@ -99,9 +99,18 @@
  		SELECT * FROM QNAFILES WHERE NUM=#{num}
  	</select>
  	
+ 	
 	<!--FileNum 한개를 조회  -->
 	<select id="getBoardFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
 		SELECT * FROM QNAFILES WHERE FILENUM=#{fileNum}
 	</select>
+	
+	<update id="setBoardUpdate" parameterType="BbsDTO">
+		UPDATE QNA SET TITLE=#{title}, CONTENTS=#{contents} WHERE NUM=#{num}
+	</update>
  	
+ 	<delete id="setBoardFileDelete" parameterType="Long">
+ 	<!--getter가 없을 경우에 넘겨주는 변수명을 쓰면 된다  -->
+ 		DELETE QNAFILES WHERE FILENUM=#{fileNum}
+ 	</delete>
  </mapper> 

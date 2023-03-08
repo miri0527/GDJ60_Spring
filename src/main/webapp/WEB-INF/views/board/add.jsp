@@ -59,7 +59,7 @@
 <script>
    setMax(5)
    $("#exampleFormControlTextarea1").summernote()
-   setParam('files');
+   setParam('addFiles');
 </script>
 </body>
   

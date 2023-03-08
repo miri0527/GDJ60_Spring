@@ -147,10 +147,7 @@ $("#commentListResult").on("click", ".del",function(e) {
 $("#commentListResult").on("click", ".update",function(e){
         
         let num = $(this).attr("data-comment-num");
-        let contents = document.getElementById("contents" + num)//td
-        console.log(contents);
-        let contentsTextArea=document.getElementById("contents")//Modal textarea
-        console.log(contentsTextArea);
+       
         //value
         $("#contents").val($("#contents"+num)).text;
         $("#contentsConfirm").attr("data-comment-num", num);

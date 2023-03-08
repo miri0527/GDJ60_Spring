@@ -62,10 +62,10 @@ public class QnaController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(QnaDTO  qnaDTO, MultipartFile[] files, HttpSession session) throws Exception {
+	public ModelAndView setBoardAdd(QnaDTO  qnaDTO, MultipartFile[] addFiles, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result =  qnaService.setBoardAdd(qnaDTO,files,session );
+		int result =  qnaService.setBoardAdd(qnaDTO,addFiles,session );
 		String message = "등록 실패";
 		
 		if(result > 0) {
@@ -163,25 +163,44 @@ public class QnaController {
 		 
 	}
 	
+	@PostMapping("update")
+	public ModelAndView setBoardUpdate(BoardDTO boardDTO, MultipartFile [] addFiles, HttpSession session, Long [] fileNum) throws Exception {
+		 ModelAndView mv = new ModelAndView();
+//		 System.out.println("FileNum 출력");
+//		 for(Long fn : fileNum) {
+//			 System.out.println(fn);
+//		 }
+		 
+		 int result =  qnaService.setBoardUpdate(boardDTO, addFiles, session, fileNum);
+		 
+		 mv.setViewName("common/result");
+		 mv.addObject("result", "수정 성공");
+		 mv.addObject("url", "./list");
+		 
+		 return mv;
+		 
+		 
+	}
+	
 	//---------------------------------------------------------------------------------
 	
-	@ExceptionHandler(NullPointerException.class)
-	public ModelAndView fixException() {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("message", "잘못된 접근입니다<br>관리자에게 문의 하세요");
-		mv.setViewName("common/error_500");
-		
-		return mv;
-	}
-	
-	@ExceptionHandler(Exception.class)
-	public ModelAndView fix2Exception() {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("message", "잘못된 접근입니다<br>관리자에게 문의 하세요");
-		mv.setViewName("common/error_500");
-		
-		return mv;
-	}
+//	@ExceptionHandler(NullPointerException.class)
+//	public ModelAndView fixException() {
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("message", "잘못된 접근입니다<br>관리자에게 문의 하세요");
+//		mv.setViewName("common/error_500");
+//		
+//		return mv;
+//	}
+//	
+//	@ExceptionHandler(Exception.class)
+//	public ModelAndView fix2Exception() {
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("message", "잘못된 접근입니다<br>관리자에게 문의 하세요");
+//		mv.setViewName("common/error_500");
+//		
+//		return mv;
+//	}
 	
 	
 	
