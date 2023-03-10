@@ -1,17 +1,24 @@
 package com.iu.s1.board.qna;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,6 +55,36 @@ public class QnaController {
 		//notice와 같은 곳으로 가기 때문에 notice jsp에서 받아주는 list라는 이름으로 보내줘야된다 
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+		//URL, Method, parameter, header
+		
+		
+		//Header
+		HttpHeaders headers = new HttpHeaders();
+		//add와 set 저 방식이 같음
+		
+		//headers.add("header명", "header값");
+		headers.add("Content-Type", "application/x-www-form-urlencoded");
+		//headers.set헤더명("header값");
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		
+		//parameter(get) -> url뒤에 넣기
+		//parameter(post)
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		//params.add("파라미터명", "파라미터값");
+		params.add("grant_type", "authorization_code");
+		params.add("client_id", "${REST_API_KEY}");
+		
+		//header, params 하나의 객체로 생성
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String,String>>(params, headers);
+		
+		
+		//String result = restTemplate.getForObject("https://dummyjson.com/products/1", String.class, request);
+		String result =  restTemplate.postForObject("https://dummyjson.com/products/1", request, String.class);
+		System.out.println(result);
+		
 		
 		return mv;
 	}
