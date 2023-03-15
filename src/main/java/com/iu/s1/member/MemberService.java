@@ -16,18 +16,19 @@ public class MemberService {
 		result = memberDAO.setMemberRoleAdd(memberDTO);
 		return result;
 	}
-	
 	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception {
 		//memberDTO= memberDAO.getMemberLogin(memberDTO);
 		//return memberDTO;
 		
-		//memberDTO : Client가 입력한 ID,PW
+		//memberDTO : Client에서 입력한 ID,PW
 		MemberDTO result = memberDAO.getMemberLogin(memberDTO);
 		//result : ID와 일치하는 모든 정보
 		
 		//pw check
 		if(result !=null && memberDTO.getPw().equals(result.getPw())) {
-			memberDTO.setPw(null); //입력한거에 null -> id는 있음
+			//ID와 ROLE정보
+			memberDTO.setPw(null);
+			memberDTO.setRoleDTO(result.getRoleDTO());
 			return memberDTO;
 		}else {
 			return null;

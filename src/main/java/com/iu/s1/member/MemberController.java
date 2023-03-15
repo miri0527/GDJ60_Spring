@@ -1,6 +1,10 @@
 package com.iu.s1.member;
 
+import java.util.Iterator;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,23 +46,54 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberLogin", method=RequestMethod.GET)
-	public ModelAndView getMemberLogin(ModelAndView modelAndView) throws Exception {
+	public ModelAndView getMemberLogin(ModelAndView modelAndView, HttpServletRequest request) throws Exception {
 		modelAndView.setViewName("/member/memberLogin");
+		
+		Cookie [] cookies =  request.getCookies();
+		
+//		for(Cookie cookie : cookies) {
+//			System.out.println(cookie.getName());
+//			System.out.println(cookie.getValue());
+//			System.out.println(cookie.getDomain());
+//			System.out.println(cookie.getPath());
+//			System.out.println("----------------------");
+//			
+//			if(cookie.getName().equals("rememberId")) {
+//				modelAndView.addObject("rememberId", cookie.getValue());
+//				break;
+//			}
+//		}
+		
 		return modelAndView;
 	}
 	
 	@RequestMapping(value="memberLogin", method = RequestMethod.POST)
-	public ModelAndView getMemberLogin(ModelAndView modelAndView , MemberDTO memberDTO, HttpServletRequest request) throws Exception {
-		memberDTO= memberService.getMemberLogin(memberDTO);
-		if(memberDTO !=null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("member", memberDTO);
+	public ModelAndView getMemberLogin(ModelAndView modelAndView , MemberDTO memberDTO, HttpServletRequest request, HttpServletResponse response, String remember) throws Exception {
+		//로그인 유뮤와 상관없이 체크만 할 때
+		//로그인 하고 기억하면 service갔따오고 넣어주면됨
+		if(remember!=null && remember.equals("remember")) {
+			Cookie cookie = new Cookie("rememberId", memberDTO.getId());
+			cookie.setMaxAge(60*60*24*7); //초 단위
+			//쿠기도 응답에 담아서 보내야되기 때문에 response로 담아서 보내줌
+			response.addCookie(cookie);
+			
+		}else {
+			Cookie cookie = new Cookie("rememberId", "");
+			//setMaxAge(-1) => 영구히 저장
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
 		}
+		
+//		memberDTO= memberService.getMemberLogin(memberDTO);
+//		if(memberDTO !=null) {
+//			HttpSession session = request.getSession();
+//			session.setAttribute("member", memberDTO);
+//		}
 		modelAndView.setViewName("redirect:../");
 		return modelAndView;
 	}
 	
-	//request�� ���� ������ �ʰ� session���� �ٷ� ���� ���� �ִ�
+	
 	@RequestMapping(value="memberLogout", method = RequestMethod.GET)
 	public ModelAndView getMemeberLogout(HttpSession session) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
@@ -72,7 +107,7 @@ public class MemberController {
 		ModelAndView modelAndView = new ModelAndView();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		
-		//id�� ����� �ִ� -> �ּ�
+	
 		memberDTO =  memberService.getMemberPage(memberDTO);
 		
 		modelAndView.addObject("dto", memberDTO);
@@ -92,9 +127,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
-	//�ٸ� ����� ������ ���� ���ϵ��� session���� ������
+	
 	public ModelAndView setMemberUpdate(MemberDTO memberDTO, ModelAndView modelAndView,HttpSession session) throws Exception {
-		//������ �ȵȴ�
+		
 		MemberDTO sessionMemberDTO = (MemberDTO) session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
 		int result =  memberService.setMemberUpdate(memberDTO);

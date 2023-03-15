@@ -29,6 +29,7 @@ public class BankBookController {
 		
 		modelAndView.setViewName("bankBook/list");
 		modelAndView.addObject("list",ar);
+		//여기도 자동 생성되기 때문에 굳이 model에 담고 pager를 보내 줄 필요가 없다
 		modelAndView.addObject("pager", pager);
 		return modelAndView;
 	}

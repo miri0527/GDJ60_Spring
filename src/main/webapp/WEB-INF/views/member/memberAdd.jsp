@@ -36,7 +36,7 @@
 		
 		<div class="mb-3 col-5 mx-auto" >
 			<label for="pw2" class="form-label">비밀번호 확인</label>
-			<input type="password" name="pw" class="form-control" id="pw2"  placeholder="비밀번호 입력"><br>
+			<input type="password" name="pwCheck" class="form-control" id="pw2"  placeholder="비밀번호 입력"><br>
 			<div id="pw2Result"></div>
 		</div>
 
@@ -57,10 +57,9 @@
 			<input type="text" name="email" class="form-control" id="email" ><br>
 			<div id="emailResult"></div>
 		</div>
-			
-			
+				
 		<div class="row col-5 mx-auto mt-4 ">
-			<button type="button" class="btn btn-outline-success col-2 " id="btn">등록</a><br>
+			<button type="submit" class="btn btn-outline-success col-2 " id="btn">등록</a><br>
 		</div>
 		
 	</form>

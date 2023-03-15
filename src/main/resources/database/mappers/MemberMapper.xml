@@ -14,16 +14,37 @@
   		VALUES(#{id},(SELECT ROLENUM FROM ROLE WHERE ROLENAME='MEMBER'))
   	</insert>
   	
-  	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberDTO">
+  	<select id="getMemberLogin" parameterType="MemberDTO" resultMap="getMemberLoginResult">
   	<!-- 전체를 들고 오지 않고 ID만 들고오면 전 방법에서는 Controller에서 session으로 꺼냈지만, 이 방법은 id만 조회되기 때문에 session엔 id만 남아있고
   	나머지 정보는 없기 때문에 page, update에서 service를 통해서 전부 다 가져오는 query문을 들고와서 가져오기 -->
   		<!-- SELECT *
   		FROM BANKMEMBERS
   		WHERE ID = #{id} AND PW=#{pw} -->
   		
-  		SELECT * FROM BANKMEMBERS
-  		WHERE ID=#{id}
+		  		SELECT * 
+				FROM BANKMEMBERS M
+					INNER JOIN
+					MEMBER_ROLE MR
+					ON (M.ID=MR.ID)
+						INNER JOIN 
+						ROLE R 
+						ON(MR.ROLENUM= R.ROLENUM)
+				WHERE M.ID = #{id}
+  		
   	</select>
+  	
+  	<resultMap type="MemberDTO" id="getMemberLoginResult">
+  		<id column="ID" property="id"/>
+  		<result column="PW" property="pw"/>
+  		<result column="NAME" property="name"/>
+  		<result column="EAMIL" property="eamil"/>
+  		<result column="PHONE" property="phone"/>
+  		<association property="roleDTO" javaType="RoleDTO">
+  			<id column="ROLENUM" property="roleNum"/>
+  			<result column="ROLENAME" property="roleName"/>
+  		</association>
+  		
+  	</resultMap>
   	
   	<update id="setMemberUpdate" parameterType="MemberDTO" >
   		UPDATE BANKMEMBERS SET NAME=#{name},PHONE=#{phone}, EMAIL=#{email}

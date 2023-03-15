@@ -19,7 +19,7 @@ public class BankBookService {
 	
 	//testcase �׽�Ʈ�� Null�� ����
 	//API �߰�
-	@Autowired
+	//@Autowired
 	private ServletContext servletContext;
 	
 	@Autowired
