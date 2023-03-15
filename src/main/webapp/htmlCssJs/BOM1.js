@@ -27,6 +27,7 @@ const btn2 = document.getElementById("btn2")
 btn2.addEventListener("click", function() {
     let c3 = document.getElementById("c3")
     console.log(c3.getAttribute("title"))
+    console.log(c3.title)
 })
 
 const btn3 = document.getElementById("btn3")

@@ -19,11 +19,11 @@ public class ProductDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-//	¾î´À mapperÀ» ¾µ²¨³Ä¸¦ NAMESPACE·Î ±¸ºĞ
+//  ì–´ëŠ mapperì„ ì“¸êº¼ëƒëŠ” ê±¸ NAMESPACEë¡œ êµ¬ë¶„
 	private final String NAMESPACE="com.iu.s1.product.ProductDAO.";
 	
-	//DAO -> ÃÑ¾Ë
-	//Äõ¸®¹® ¿¹»óÇØ¼­ Ã³À½¿¡ Àû±â
+	//DAO -> ì´ì•Œ
+	//ì¿¼ë¦¬ë¬¸ ì˜ˆìƒí•´ì„œ ì²˜ìŒì— ì ê¸°
 	public Long getProductNum() throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE + "getProductNum");
@@ -32,13 +32,13 @@ public class ProductDAO {
 	
 	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception {
 		
-		//ÀÌ mapperÀÇ id¸¦ ½ÇÇà , °á°ú°ªÀÌ ÇÑ °³±â ¶§¹®¿¡ selectOneÀ» ¾´´Ù -> °á°ú°ªÀÌ ¿©·¯ °³¸é ¿¡·¯
+		// ì´ mapperì˜ idë¥¼ ì‹¤í–‰, ê²°ê³¼ê°’ì´ í•œ ê°œì´ê¸° ë–„ë¬¸ì— productDTO íƒ€ì…ìœ¼ë¡œ ë¦¬í„´
 		productDTO =sqlSession.selectOne(NAMESPACE + "getProductDetail", productDTO);
 		return productDTO;
 	}
 	
 	public List<ProductDTO> getProductList() throws Exception {
-		//¸Å°³º¯¼ö°¡ ¾ø¾î¼­ º¸³»´Â°Ô ¾ø´Ù
+		//ë§¤ê°œë³€ìˆ˜ê°€ ì—†ì–´ì„œ ë³´ë‚´ëŠ”ê²Œ ì—†ë‹¤
 		return sqlSession.selectList(NAMESPACE + "getProductList");
 	}
 	

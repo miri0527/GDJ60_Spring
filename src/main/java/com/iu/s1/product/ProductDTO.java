@@ -1,7 +1,7 @@
 package com.iu.s1.product;
 
 public class ProductDTO {
-	//DTO´Â ÇÊ¿äÇÒ¶§ ¿©·¯°³ ¸¸µé¾î¾ßµÇ´Âµ¥ AnnotationÀº ÀüÃ¼ÇÁ·Î±×·¥¿¡¼­ ÇÑ °³¸¸ ¸¸µé¾îÁö±â ¶§¹®¿¡ Annotation ¼±¾ğ x
+	//DTOëŠ” í•„ìš”í•  ë•Œ ì—¬ëŸ¬ê°œ ë§Œë“¤ì–´ì•¼í•˜ëŠ”ë° Annotationì€ ì²œì²´ í”„ë¡œê·¸ë¨ì—ì„œ í•œ ê°œë§Œ ë§Œë“¤ì–´ì§€ê¸° ë–„ë¬¸ì— Annotation ì„ ì—° x
 	private Long productNum;
 	private String productName;
 	private String productDetail;

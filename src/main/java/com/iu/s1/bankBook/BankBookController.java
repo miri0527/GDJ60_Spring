@@ -34,7 +34,6 @@ public class BankBookController {
 	}
 	
 	@RequestMapping(value="detail", method = RequestMethod.GET)
-	//parameter�� bookNum������, �ѹ��� bankBookDTO�� �޾ƿ´�
 	public ModelAndView getBankBookDetail(ModelAndView modelAndView,BankBookDTO bankBookDTO) throws Exception {
 		bankBookDTO =  bankBookService.getBankBookDetail(bankBookDTO);
 		modelAndView.setViewName("bankBook/detail");

@@ -41,3 +41,7 @@ btn.onclick=function() {
     //focus 강제 실행 해라
     input2.focus();
 }
+
+function f1() {
+    input2.focus();
+}

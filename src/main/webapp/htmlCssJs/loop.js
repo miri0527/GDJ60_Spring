@@ -10,10 +10,16 @@ let ar = [3,1,2];
 //새로운 길이가 들어감
 let l = ar.push('abc')
 
+for(let i=0; i<ar.length; i++) {
+    console.log(ar[i])
+}
+
+console.log("-------------")
 //삭제한 것을 반환
 let e = ar.pop();
 console.log(e)
 
+console.log("----------")
 //오름차순
 ar.sort();
 
@@ -24,7 +30,7 @@ for(let i=0; i<ar.length; i++) {
     console.log(ar[i]);
 }
 
-window.console.log(ar.includes(2))
+window.console.log(ar.includes(5))
 
 //화면 전체 -> window(부모)
 //웹페이지가 보여지는 부분 -> documents(자식)

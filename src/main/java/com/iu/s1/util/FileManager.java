@@ -11,34 +11,34 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileManager {
    
-   //FileÀ» HDD¿¡ ÀúÀå
+   //Fileì„ HDDì— ì €ì¥
    public String fileSave(MultipartFile multipartFile, String path) throws Exception {
-      //1. ¾îµğ¿¡ ÀúÀåÇÒ °ÍÀÎ°¡?
+      //1. ì–´ë””ì— ì €ì¥í•  ê²ƒì¸ê°€?
       //      /resources/upload/bankbook/...
-      //2. ÀúÀå °ü¸®´Â ¿î¿µ Ã¼Á¦°¡ ´ã´ç
+      //2. ì €ì¥ê´€ë¦¬ëŠ” ìš´ì˜ì²´ì œê°€ ë‹´ë‹¹
       
-      //ÀúÀåÇÒ Æú´õÀÇ Á¤º¸¸¦ °¡Áö°í ÀÖ´Â ÀÚ¹Ù °´Ã¼¸¦ ¼±¾ğ
+      // ì €ì¥í•  í´ë”ì˜ ì •ë³´ë¥¼ ê°€ì§€ê³  ìˆëŠ” ìë°” ê°ì²´ ì„ ì–¸
       File file = new File(path);
-      //Æú´õ°¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é Æú´õ »ı¼º
+      //í´ë”ê°€ ì¡´ì¬ í•˜ì§€ ì•Šìœ¼ë©´ í´ë” ë§Œë“¤ê¸°
       if(!file.exists()) {
          file.mkdirs();
       }
       
-      //3. Áßº¹µÇÁö ¾Ê´Â ÆÄÀÏ¸í »ı¼º
+      //3. ì¤‘ë³µë˜ì§€ ì•ŠëŠ” íŒŒì¼ëª… ìƒì„±
       //Calendar calendar = Calendar.getInstance();
       //calendar.getTimeInMillis();
       String name = UUID.randomUUID().toString();
 
-      //4. È®ÀåÀÚ Ãß°¡
-      //OriginalName¿¡¼­ subStringÀ» ÀÌ¿ëÇØ¼­ È®ÀåÀÚ¸¦ ÃßÃâ
+      //4. í™•ì¥ì ì¶”ê°€
+      //OriginalNameì—ì„œ subStringì„ ì´ìš©í•´ì„œ í™•ì¥ìë¥¼ ì¶”ì¶œ
       name = name + "_" + multipartFile.getOriginalFilename();
 
-      //5. ÆÄÀÏ ÀúÀå
+      //5. íŒŒì¼ ì €ì¥
       file = new File(file, name);
       
-      //   1) multipartFile °´Ã¼ÀÇ transferTo() »ç¿ë
+      //   1) multipartFile ê°ì²´ì˜ transferTo() ì‚¬ìš©
       //multipartFile.transferTo(file);
-      //   2) Spring API FileCopyUtils °´Ã¼ÀÇ copy() »ç¿ë
+      //   2) Spring API FileCopyUtils ê°ì²´ì˜ copy() ì‚¬ìš©
       FileCopyUtils.copy(multipartFile.getBytes(), file);
       
       return name;

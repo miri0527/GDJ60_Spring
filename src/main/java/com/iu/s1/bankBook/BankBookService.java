@@ -44,13 +44,12 @@ public class BankBookService {
 		
 		if(pic.isEmpty()) { //pic.getSize() !=0
 		
-		//1. File�� HDD�� ���� ���
-		// Project ��ΰ� �ƴ� OS�� �̿��ϴ� ���
+		
 		String realPath = servletContext.getRealPath("resources/upload/bankBook");
 		System.out.println(realPath);
 		String fileName = fileManager.fileSave(pic, realPath);
 		
-		//2. DB�� ����
+		
 		BankBookImgDTO bankBookImgDTO = new BankBookImgDTO();
 		bankBookImgDTO.setFileName(fileName);
 		bankBookImgDTO.setOriName(pic.getOriginalFilename());

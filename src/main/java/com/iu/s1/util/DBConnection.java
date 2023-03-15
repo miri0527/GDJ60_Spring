@@ -20,17 +20,17 @@ public class DBConnection {
 	
 		//getConnection
 		public static Connection getConnection() throws Exception{
-			//1.¿¬°áÁ¤º¸
+			//1.ì—°ê²°ì •ë³´
 			String user = "user01";
 			String password = "user01";
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			//driver
 			String driver = "oracle.jdbc.driver.OracleDriver";
 			
-			//2.DriverÀ» ¸Ş¸ğ¸®¿¡ ·Îµù
+			//2.Driverë¥¼ ë©”ëª¨ë¦¬ì— ë¡œë”©
 			Class.forName(driver);
 			
-			//3.DB¿¬°á
+			//3.DBì—°ê²°
 			return DriverManager.getConnection(url,user,password);
 			
 		}

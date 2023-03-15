@@ -17,19 +17,20 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/product/*")
 public class ProductController {
 	
-	//Controller -> ±ºÀÎ
+	//Controller -> êµ°ì¸
 	@Autowired
 	private ProductService productService;
 	
-	// /product/list: ¸®½ºÆ®Á¶È¸ -> WEB-INF/views/product/productList.jsp
-    // /product/productAdd : »óÇ°µî·Ï -> WEB-INF/views/product/productAdd.jsp
-    // /product/update: »óÇ°¼öÁ¤->WEB-INF/views/product/productUpdate.jsp
-    // /product/delete: »óÇ°»èÁ¦ 
-    // /product/detail: »óÇ°ÇÏ³ªÁ¶È¸ -> WEB-INF/views/product/productDetail.jsp
+	// /product/list: ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ> WEB-INF/views/product/productList.jsp
+    // /product/productAdd : ìƒí’ˆ ë“±ë¡ -> WEB-INF/views/product/productAdd.jsp
+    // /product/update: ìƒí’ˆ ìˆ˜ì •->WEB-INF/views/product/productUpdate.jsp
+    // /product/delete: ìƒí’ˆ ì‚­ì œ
+    // /product/detail: ìƒí’ˆ ìƒì„¸ë³´ê¸° 
 	
-	@RequestMapping(value = "list")
+	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView getProductList(ModelAndView mv) throws Exception {
-		//ModelAndView mv = new ModelAndView(); -> °´Ã¼¸¦ ¸¸µé¾îµµ µÇ°í ¸Å°³º¯¼ö·Î ¹Ş¾ÆµµµÈ´Ù
+		//ë·°ë¡œ ë³´ë‚¼ë•Œ í¬ê²Œ 3ê°€ì§€ -> String, void,ModelAndView
+		//void -> urlê²½ë¡œì™€ íŒŒì¼ëª…ì´ ê°™ì„ ë–„ ê°€ëŠ¥
 		
 		List<ProductDTO> ar =  productService.getProductList();
 		
@@ -41,13 +42,14 @@ public class ProductController {
 	
 	//getProductDetail
 	@RequestMapping(value = "detail")
-	//DispacherServlet¿¡ request, response¸¦ °¡Áö°í ÀÖ±â ¶§¹®¿¡ controller·Î request,response¸¦ ¹ŞÀ» ¼ö ÀÖ´Ù
-	/*(¸Å°³º¯¼ö·Î ¼±¾ğ) 1.HttpServletRequest request, HttpServletResponse response*/
-	//required :false -> °ªÀÌ ¾Èµé¾î¿À¸é defaultValue °ªÀ» ¹Ş°í, ¾Èµé¾î¿À¸é ¾È¹Ş°í, true¸é °ªÀÌ ¾Èµé¾î¿À¿° defaultValue°ªÀ» ¹Ş°í, ¾øÀ¸¸é null°ªÀ» Áı¾î³Ö´Â´Ù
-	//(¸Å°³º¯¼ö·Î ¼±¾ğ) 2.long num,@RequestParam(value = "n")String name, @RequestParam(value="a",defaultValue="1",int age required = false
+	
+	//DispacherServletì— request,response ê°ì²´ê°€ ë“¤ì–´ìˆê¸° ë•Œë¬¸ì—  controllerë¡œ request,responseë¥¼ ë°›ì„ ìˆ˜ ìˆë‹¤
+	//1.(ë§¤ê°œë³€ìˆ˜ë¡œ ì„ ì–¸) HttpServletRequest request, HttpServletResponse response
+	//required: ê¸°ë³¸ ê°’ì€ true, í•„ìˆ˜ê°€ ì•„ë‹Œ íŒŒë¼ë¯¸í„°ëŠ” falseë¥¼ ì£¼ë©´ ë¨ , í•„ìˆ˜ê°€ ì•„ë‹Œ íŒŒë¼ë¯¸í„°ê°€ ì¡´ì¬ í•˜ì§€ ì•Šì„ ê²½ìš°ëŠ” nullê°’ ë°˜í™˜
+	//í•˜ì§€ë§Œ nullê°’ì´ ë“¤ì–´ì˜¬ ìˆ˜ ì—†ëŠ” ê¸°ë³¸ë°ì´í„°íƒ€ì…ì´ë¼ë©´ ì—ëŸ¬ ë°œìƒ
 	public String getProductDetail(ProductDTO productDTO, Model model ) throws Exception {
-		//Model -> requestÃ³·³ jsp±îÁö µ¥ÀÌÅÍ¸¦ º¸³»´Â ¿ªÇÒ, ÀÀ´äÀÌ ³ª°¡¸é »ç¶óÁø´Ù
-		//ÆÄ¶ó¹ÌÅÍÀÇ ÀÌ¸§°ú setterÀÇ ÀÌ¸§ÀÌ °ª¾Æ¾ß ÇÔ
+		//Model -> requestì²˜ëŸ¼ jspê¹Œì§€ ë°ì´í„°ë¥¼ ë³´ë‚´ëŠ” ì—­í• , ì‘ë‹µì´ ë‚˜ê°€ë©´ ì‚¬ë¼ì§„ë‹¤
+		//íŒŒë¼ë¯¸í„° ì´ë¦„ê³¼ setterì´ë¦„ì´ ê°™ì•„ì•¼í•¨
 		
 		System.out.println("Product Detail");
 		//String num =  request.getParameter("num");
@@ -67,24 +69,23 @@ public class ProductController {
 		return "product/productDetail";
 	}
 	
-	//uri°æ·Î°¡ °°À¸¸é ¸®ÅÏÀ» ÇÏÁö ¾Ê¾Æµµ ÀÚµ¿À¸·Î ÀÌ¸§ÀÌ °°Àº jsp·Î Ã£¾Æ°¡ÁØ´Ù
+	//uri ê²½ë¡œê°€ ê°™ìœ¼ë¨„ ë¦¬í„´ì„ í•´ì£¼ì§€ ì•Šì•„ë„ ìë™ìœ¼ë¡œ ì´ë¦„ì´ ê°™ì€ jspíŒŒì¼ë¡œ ì°¾ì•„ê°€ì¤€ë‹¤
 	@RequestMapping(value = "productAdd", method = RequestMethod.GET)
 	public void setProductAdd() {
 		
 	}
 	
-	//ÀÔ·ÂÆäÀÌÁö¸¦ ¹Ş¾ÆÁÖ´Â ¿ªÇÒ
+	//ì…ë ¥ì„ ë°›ì•„ì£¼ëŠ” ì—­í• 
 	@RequestMapping(value = "productAdd", method = RequestMethod.POST)
 	public String setProductAdd(ProductDTO productDTO) throws Exception {
 		int result= productService.setProductAdd(productDTO,null);
 		System.out.println(result == 1);
-		//redirect : »ç¿ëÀÚ°¡ list·Î ´Ù½Ã ¾ÈÇØµµ ÀÚµ¿À¸·Î list¸¦ ¿äÃ»ÇØÁÖ´Â °Í
+		//redirect : ì‚¬ìš©ìê°€ listë¡œ ë‹¤ì‹œ ì•ˆê°€ë„ ìë™ìœ¼ë¡œ listë¡œ ìš”ì²­í•´ì£¼ëŠ” ê²ƒ
 		String re = "redirect:./list";
 		return re;
 	}
-	
-	//String°ú void µÑ ´Ù ¸®ÅÏÇÏ¸é ¹»·Î ¹Ş¾Æ¾ßÇÒÁö ¸ğ¸¥´Ù ->  ±× ¶§ modelAndView¶ó´Â Å¸ÀÔÀ¸·Î ¹Ş´Â´Ù
-	//Controller¿¡¼­ ¸®ÅÏÇÏ´Â°Ô modelAndView
+	//Stringì´ë‚˜ voidë¡œ ë¦¬í„´í•˜ë©´ ë­˜ë¡œ ë°›ì•„ì£¼ëŠ” ì§€ ì˜ ëª¨ë¥¸ë‹¤ -> ê·¸ëŸ´ ë•Œ ModelAndViewë¡œ ë¦¬í„´
+	//Controllerì—ì„œ ë¦¬í„´í•˜ëŠ” ê²ƒì´ ModelAndView
 	@RequestMapping(value = "update")
 	public ModelAndView update() {
 		ModelAndView mv = new ModelAndView();

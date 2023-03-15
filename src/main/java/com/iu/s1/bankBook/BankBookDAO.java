@@ -24,7 +24,7 @@ public class BankBookDAO {
 		return sqlSession.selectList(NAMESPACE + "getBankBookList", pager);
 	}
 	
-	//�������� ������ num�� ��������
+	
 	public BankBookDTO getBankBookDetail(BankBookDTO bankBookDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getBankBookDetail", bankBookDTO);
 	}

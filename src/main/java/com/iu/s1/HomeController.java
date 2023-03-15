@@ -22,7 +22,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	//web.xml¿¡ DispatcherServletÀÌ ÀÚµ¿À¸·Î returnÇÑ ÀÌ °ªÀ» servlet-context.xmlÀÇ property·Î ³Ñ¾î°¡°Ô ¸¸µé¾î¼­ °æ·Î¸¦ ¶È°°ÀÌ Ã£¾ÆÁØ´Ù
+	//web.xmlì— DispacherServletì´ ìë™ìœ¼ë¡œ ë¦¬í„´í•œ ê°’ì„ servlet-context.xmlì˜ propertyë¡œ ë„˜ì–´ê°€ê²Œ ë§Œë“¤ì–´ì„œ ê²½ë¡œë¥¼ ë˜‘ê°™ì´ ì°¾ì•„ì¤€ë‹¤
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
